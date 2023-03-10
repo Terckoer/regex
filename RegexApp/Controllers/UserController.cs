@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RegexApp.Models;
 using System.Net;
 using System.Xml.Linq;
 
@@ -22,19 +23,26 @@ namespace RegexApp.Controllers {
         [HttpPost]
         public ActionResult ValidateEmail(string email) {
             //SET DE DATOS
-            string emailValido = "email.valido@gmail.com"; // Validar si el email del parametro existe
-            if (email == emailValido) {
-                //ENVIAR CODIGO AL emailValido
-                return View("UserValidateTempCode");//Esta vista seria la que se le manda al correo valido con una validez de 30 minutos
+            UserModel? userModel = UserModel.GetUser(email); // Validar si el email del parametro existe
+            string validEmail = "";
+            string validCode = "";
+            if(userModel != null) {
+                validEmail = userModel.Email ?? "";
+                validCode = userModel.GetRandomNumber();
             }
+            ViewData["ValidCode"] = validCode;
+            
+            if (email == validEmail)//ENVIAR CODIGO AL emailValido
+                return View("UserValidateTempCode");//Esta vista seria la que se le manda al correo valido con una validez de 30 minutos
+            
             return new ContentResult() { Content="Invalid Email"};
             
         }
 
         [HttpPost]
-        public ActionResult ValidateCode(string code) {
+        public ActionResult ValidateCode(string code, string validCode) {
             //SET DE DATOS
-            string validCode = "000000"; // Validar si el codigo temporal del parametro existe
+            // Validar si el codigo temporal del parametro existe
             if (code == validCode) {
                 return View("UserNewPassword");//Lo mando a ingresar su nueva contraseña 
             }
