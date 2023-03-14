@@ -51,9 +51,21 @@ namespace RegexApp.Controllers {
         }
 
         // GET: UserController/Create
-        public ActionResult Create() {
+        public ActionResult CreateUser(string username, string email, string password, string confirmPassword) {
+            //VALIDACIONES DE CONTRASENA
+            //ENCRIPTAR LA INFORMACION
+            //CreateUser
+            UserModel user = new UserModel() { Email = email, UserName = username, Password = password};
+
+
+
             return View();
         }
+
+        public ActionResult GetUserCreate() {
+            return View("UserCreate");
+        }
+
 
         // POST: UserController/Create
         [HttpPost]
