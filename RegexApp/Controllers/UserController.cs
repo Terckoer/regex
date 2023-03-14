@@ -54,7 +54,6 @@ namespace RegexApp.Controllers {
         public ActionResult CreateUser(string username, string email, string password, string confirmPassword) {
             //VALIDACIONES DE CONTRASENA
             //ENCRIPTAR LA INFORMACION
-            //CreateUser
             UserModel user = new UserModel() { Email = email, UserName = username, Password = password};
 
 
