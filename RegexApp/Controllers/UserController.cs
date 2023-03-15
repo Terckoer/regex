@@ -75,10 +75,17 @@ namespace RegexApp.Controllers {
 
         [HttpPost]
         public ActionResult ValidateLogin(UserModel user) {
-            if (UserModel.ValidateUser(user)) 
-                return RedirectToAction("Privacy", "Home");
+            if (UserModel.ValidateUser(user)) {
+                ViewData["username"] = user.UserName;
+                return View("UserLogged");
+            } 
             else 
                 return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult Logout() {
+            //CERRAR SESION, ELIMINAR COOKIES, TOKENS Y DEMAS COSAS QUE SIRVAN PARA VALIDAR SESION
+            return RedirectToAction("Index", "Home");
         }
 
 

@@ -1,0 +1,8 @@
+--CREATE TABLE tblUsersData (
+--PK_UsersData INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+--FK_UsersData_Users INT FOREIGN KEY REFERENCES tblUsers(PK_Users) NOT NULL,
+--FirstName VARCHAR(255),
+--LastName VARCHAR(255),
+--CreatedAt DATETIME NOT NULL,
+--UpdatedAt DATETIME NOT NULL
+--)

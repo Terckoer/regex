@@ -1,14 +1,25 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Microsoft.Build.Framework;
+using Microsoft.Data.SqlClient;
 using System.Data;
+using System.ComponentModel.DataAnnotations;
 using BC = BCrypt.Net.BCrypt;
+using RequiredAttribute = System.ComponentModel.DataAnnotations.RequiredAttribute;
 
 namespace RegexApp.Models {
     public class UserModel {
      
         public int PK_Users { get; set; } = 0;
         public int FK_Users_Roles { get; set; } = 0;
+
+        [Display(Name = "Email address")]
+        [Required(ErrorMessage = "The email address is required")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string? Email { get; set; } = "";
+        
+        [Required(ErrorMessage = "Please enter your username"), MaxLength(25)]
         public string? UserName { get; set; } = "";
+
+        [Required(ErrorMessage = "Please enter your password"), MaxLength(255)]
         public string? Password { get; set; } = "";
         public bool Enabled { get; set; } = false;
 
