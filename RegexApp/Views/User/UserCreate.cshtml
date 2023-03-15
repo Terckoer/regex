@@ -5,7 +5,7 @@
     <div class="w-100 mb-3">
         <h1>User</h1>
     </div>
-    <form class="d-flex flex-column align-items-center justify-content-center" action="CreateUser">
+    <form class="d-flex flex-column align-items-center justify-content-center" method="post" action="CreateUser">
         <div class="d-flex flex-column align-items-start w-25 mb-1">
             <label class="col-form-label fs-3" for="id-email">Email</label>
             <input class="form-control" type="email" placeholder="Email" id="id-email" name="email"/>
@@ -27,7 +27,7 @@
             <input class="form-control" type="password" placeholder="Confirm password" id="id-confirm-password" name="confirmPassword"/>
         </div>
         <div class="w-25 mt-2">
-            <input class="btn btn-success w-100" type="button" value="Create" />
+            <input class="btn btn-success w-100" type="submit" value="Create" />
         </div>
     </form>
 </div>

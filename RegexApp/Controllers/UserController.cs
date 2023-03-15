@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using RegexApp.Models;
 using System.Net;
 using System.Xml.Linq;
+using BC = BCrypt.Net.BCrypt;
 
 namespace RegexApp.Controllers {
     public class UserController : Controller {
@@ -51,18 +52,33 @@ namespace RegexApp.Controllers {
         }
 
         // GET: UserController/Create
+        [HttpPost]
         public ActionResult CreateUser(string username, string email, string password, string confirmPassword) {
+            bool result = false;
             //VALIDACIONES DE CONTRASENA
-            //ENCRIPTAR LA INFORMACION
-            UserModel user = new UserModel() { Email = email, UserName = username, Password = password};
+            if(password == confirmPassword) {
+                //ENCRIPTAR LA CONTRASENA
+                string encryptedPassword = BC.HashPassword(password);
+                UserModel user = new UserModel() { FK_Users_Roles=2, Email = email, UserName = username, Password = encryptedPassword, Enabled = true};
+                result = UserModel.CreateUser(user);
+            }
 
-
-
-            return View();
+            if (result)
+                return RedirectToAction("Index", "Home");
+            else
+                return RedirectToAction("UserCreate");
         }
 
-        public ActionResult GetUserCreate() {
+        public ActionResult UserCreate() {
             return View("UserCreate");
+        }
+
+        [HttpPost]
+        public ActionResult ValidateLogin(UserModel user) {
+            if (UserModel.ValidateUser(user)) 
+                return RedirectToAction("Privacy", "Home");
+            else 
+                return RedirectToAction("Index", "Home");
         }
 
 
