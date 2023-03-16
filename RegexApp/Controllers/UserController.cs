@@ -62,7 +62,7 @@ namespace RegexApp.Controllers {
                 UserModel user = new UserModel() { FK_Users_Roles=2, Email = email, UserName = username, Password = encryptedPassword, Enabled = true};
                 result = UserModel.CreateUser(user);
             }
-            //comment
+            //commen
             if (result)
                 return RedirectToAction("Index", "Home");
             else
