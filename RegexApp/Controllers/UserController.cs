@@ -77,6 +77,7 @@ namespace RegexApp.Controllers {
         public ActionResult ValidateLogin(UserModel user) {
             if (UserModel.ValidateUser(user)) {
                 ViewData["username"] = user.UserName;
+                //Session["a"] = "Hello";
                 return View("UserLogged");
             } 
             else 
