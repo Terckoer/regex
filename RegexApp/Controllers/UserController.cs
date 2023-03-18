@@ -11,12 +11,11 @@ namespace RegexApp.Controllers {
         public ActionResult Index() {
             return View("User");
         }
-        // GET: UserController/Details/5
+
         public ActionResult Details(int id) {
             return View();
         }
 
-        // GET: UserController/ResetPassword
         public ActionResult ResetPassword() {
             return View("UserResetPassword");
         }
@@ -51,7 +50,6 @@ namespace RegexApp.Controllers {
 
         }
 
-        // GET: UserController/Create
         [HttpPost]
         public ActionResult CreateUser(string username, string email, string password, string confirmPassword) {
             bool result = false;
@@ -77,7 +75,7 @@ namespace RegexApp.Controllers {
         public ActionResult ValidateLogin(UserModel user) {
             if (UserModel.ValidateUser(user)) {
                 ViewData["username"] = user.UserName;
-                //Session["a"] = "Hello";
+                //HttpContext.Session.Id = "1234213";
                 return View("UserLogged");
             } 
             else 

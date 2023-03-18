@@ -4,10 +4,14 @@ using System.Data;
 using System.ComponentModel.DataAnnotations;
 using BC = BCrypt.Net.BCrypt;
 using RequiredAttribute = System.ComponentModel.DataAnnotations.RequiredAttribute;
+using System.Configuration;
+using RegexApp.Database;
 
 namespace RegexApp.Models {
     public class UserModel {
-     
+
+        private static readonly string conectionString = Db.GetConectionString();
+
         public int PK_Users { get; set; } = 0;
         public int FK_Users_Roles { get; set; } = 0;
 
@@ -28,10 +32,9 @@ namespace RegexApp.Models {
         public static UserModel? GetUser(string email) {
             SqlDataReader? reader = null;
             UserModel? modelo = null;
-            string connection = "Server=localhost\\SQLEXPRESS;Database=REGEX;Trusted_Connection=True;";
             try {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = new SqlConnection(connection);
+                cmd.Connection = new SqlConnection(conectionString);
                 cmd.Connection.Open();
                 cmd.CommandText = "SELECT PK_Users, FK_Users_Roles, Email, UserName, Password_, Enabled_ FROM tblUsers WHERE Email=@email";
                 cmd.Parameters.Add("@email", SqlDbType.VarChar, 75).Value = email;
@@ -62,10 +65,10 @@ namespace RegexApp.Models {
         public static bool ValidateUser(UserModel user) {
             SqlDataReader? reader = null;
             bool result = false;
-            string connection = "Server=localhost\\SQLEXPRESS;Database=REGEX;Trusted_Connection=True;";
+            
             try {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = new SqlConnection(connection);
+                cmd.Connection = new SqlConnection(conectionString);
                 cmd.Connection.Open();
                 cmd.CommandText = "SELECT UserName, Password_ FROM tblUsers WHERE UserName=@username AND Enabled_=1";
                 cmd.Parameters.Add("@username", SqlDbType.VarChar, 25).Value = user.UserName;
@@ -88,7 +91,7 @@ namespace RegexApp.Models {
         public static bool CreateUser(UserModel model) {
             using (SqlCommand cmd = new SqlCommand()) {
                 try {
-                    cmd.Connection = new SqlConnection("Server=localhost\\SQLEXPRESS;Database=REGEX;Trusted_Connection=True;");
+                    cmd.Connection = new SqlConnection(conectionString);
                     cmd.Connection.Open();
 
                     cmd.CommandText = "INSERT INTO tblUsers (FK_Users_Roles, Email, UserName, Password_, Enabled_) VALUES (@fkUserRole, @email, @username, @password, @enabled)";
