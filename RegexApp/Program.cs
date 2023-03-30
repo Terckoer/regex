@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using RegexApp.Database;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -13,6 +15,9 @@ builder.Services.AddSession(options => {
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+//Add a unique instance of type "Db" in the constructor to use for the rest of the time while the app is running
+builder.Services.AddSingleton(new Db(builder.Configuration.GetConnectionString("conn")));
 
 //var conn = builder.Configuration["ConnectionStrings:conn"];
 var app = builder.Build();

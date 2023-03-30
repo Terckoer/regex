@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RegexApp.Database;
 using RegexApp.Models;
 using System.Net;
 using System.Xml.Linq;
@@ -7,6 +8,12 @@ using BC = BCrypt.Net.BCrypt;
 
 namespace RegexApp.Controllers {
     public class UserController : Controller {
+
+        private readonly Db db;
+        public UserController(Db db) {
+            this.db = db;
+        }
+
         // GET: UserController
         public ActionResult Index() {
             return View("User");
@@ -23,7 +30,7 @@ namespace RegexApp.Controllers {
         [HttpPost]
         public ActionResult ValidateEmail(string email) {
             //SET DE DATOS
-            UserModel? userModel = UserModel.GetUser(email); // Validar si el email del parametro existe
+            UserModel? userModel = UserModel.GetUser(email, db); // Validar si el email del parametro existe
             string validEmail = "";
             string validCode = "";
             if(userModel != null) {
@@ -58,9 +65,8 @@ namespace RegexApp.Controllers {
                 //ENCRIPTAR LA CONTRASENA
                 string encryptedPassword = BC.HashPassword(password);
                 UserModel user = new UserModel() { FK_Users_Roles=2, Email = email, UserName = username, Password = encryptedPassword, Enabled = true};
-                result = UserModel.CreateUser(user);
+                result = UserModel.CreateUser(user, db);
             }
-            //commentario
             if (result)
                 return RedirectToAction("Index", "Home");
             else
@@ -73,7 +79,7 @@ namespace RegexApp.Controllers {
 
         [HttpPost]
         public ActionResult ValidateLogin(UserModel user) {
-            if (UserModel.ValidateUser(user)) {
+            if (UserModel.ValidateUser(user, db)) {
                 ViewData["username"] = user.UserName;
                 //HttpContext.Session.Id = "1234213";
                 return View("UserLogged");

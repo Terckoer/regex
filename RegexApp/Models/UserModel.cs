@@ -9,9 +9,7 @@ using RegexApp.Database;
 
 namespace RegexApp.Models {
     public class UserModel {
-
-        private static readonly string conectionString = Db.GetConectionString();
-
+                                
         public int PK_Users { get; set; } = 0;
         public int FK_Users_Roles { get; set; } = 0;
 
@@ -29,12 +27,12 @@ namespace RegexApp.Models {
 
         public static Random Rnd = new Random();
         
-        public static UserModel? GetUser(string email) {
+        public static UserModel? GetUser(string email, Db db) {
             SqlDataReader? reader = null;
             UserModel? modelo = null;
             try {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = new SqlConnection(conectionString);
+                cmd.Connection = new SqlConnection(db.ConectionString);
                 cmd.Connection.Open();
                 cmd.CommandText = "SELECT PK_Users, FK_Users_Roles, Email, UserName, Password_, Enabled_ FROM tblUsers WHERE Email=@email";
                 cmd.Parameters.Add("@email", SqlDbType.VarChar, 75).Value = email;
@@ -62,13 +60,13 @@ namespace RegexApp.Models {
             return modelo;
         }
 
-        public static bool ValidateUser(UserModel user) {
+        public static bool ValidateUser(UserModel user, Db db) {
             SqlDataReader? reader = null;
             bool result = false;
             
             try {
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = new SqlConnection(conectionString);
+                cmd.Connection = new SqlConnection(db.ConectionString);
                 cmd.Connection.Open();
                 cmd.CommandText = "SELECT UserName, Password_ FROM tblUsers WHERE UserName=@username AND Enabled_=1";
                 cmd.Parameters.Add("@username", SqlDbType.VarChar, 25).Value = user.UserName;
@@ -88,10 +86,10 @@ namespace RegexApp.Models {
             return result;
         }
 
-        public static bool CreateUser(UserModel model) {
+        public static bool CreateUser(UserModel model, Db db) {
             using (SqlCommand cmd = new SqlCommand()) {
                 try {
-                    cmd.Connection = new SqlConnection(conectionString);
+                    cmd.Connection = new SqlConnection(db.ConectionString);
                     cmd.Connection.Open();
 
                     cmd.CommandText = "INSERT INTO tblUsers (FK_Users_Roles, Email, UserName, Password_, Enabled_) VALUES (@fkUserRole, @email, @username, @password, @enabled)";

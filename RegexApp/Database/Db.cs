@@ -1,12 +1,17 @@
-﻿using Microsoft.Data.SqlClient;
-
+﻿
 namespace RegexApp.Database {
     public class Db {
 
-        public static string GetConectionString() {
-            //Read from ENV VARIABLE or Appsettings.json
-            return "Server=localhost\\SQLEXPRESS;Database=REGEX;Trusted_Connection=True;";
+        public string ConectionString { get; }
+        public Db(string ConectionString) {
+            this.ConectionString = ConectionString;
         }
+
+        //public string GetConectionString() {
+        //    ////Read from ENV VARIABLE or Appsettings.json
+        //    //"Server=localhost\\SQLEXPRESS;Database=REGEX;Trusted_Connection=True;";
+        //    return configuration.GetConnectionString("conn");
+        //}
 
     }
 }
