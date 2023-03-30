@@ -108,6 +108,27 @@ namespace RegexApp.Models {
             }
         }
 
+        public static bool UpdateUserPassword(UserModel model, Db db) {
+            using SqlCommand cmd = new SqlCommand();
+            using SqlConnection conn = new SqlConnection(db.ConectionString);
+            try {
+                cmd.Connection = conn;
+                cmd.Connection.Open();
+
+                cmd.CommandText = "UPDATE tblUsers SET Password_ = @password WHERE Email = @email AND Username = @username";
+                cmd.Parameters.Add("@email", SqlDbType.VarChar, 75).Value = model.Email;
+                cmd.Parameters.Add("@username", SqlDbType.VarChar, 25).Value = model.UserName;
+                cmd.Parameters.Add("@password", SqlDbType.VarChar, 255).Value = model.Password;
+
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex);
+                return false;
+            }
+        }
+
         public string GetRandomNumber() {
             return Rnd.Next(100000, 999999).ToString();
         }

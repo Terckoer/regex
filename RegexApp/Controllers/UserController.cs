@@ -28,6 +28,7 @@ namespace RegexApp.Controllers {
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult ValidateEmail(string email) {
             //SET DE DATOS
             UserModel? userModel = UserModel.GetUser(email, db); // Validar si el email del parametro existe
@@ -47,6 +48,7 @@ namespace RegexApp.Controllers {
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult ValidateCode(string code, string validCode) {
             //SET DE DATOS
             // Validar si el codigo temporal del parametro existe
@@ -58,6 +60,7 @@ namespace RegexApp.Controllers {
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateUser(string username, string email, string password, string confirmPassword) {
             bool result = false;
             //VALIDACIONES DE CONTRASENA
@@ -78,6 +81,7 @@ namespace RegexApp.Controllers {
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult ValidateLogin(UserModel user) {
             if (UserModel.ValidateUser(user, db)) {
                 ViewData["username"] = user.UserName;
@@ -93,22 +97,21 @@ namespace RegexApp.Controllers {
             return RedirectToAction("Index", "Home");
         }
 
-
-        // POST: UserController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection) {
-            try {
-                return RedirectToAction(nameof(Index));
-            }
-            catch {
-                return View();
-            }
-        }
-
         // GET: UserController/Edit/5
-        public ActionResult Edit(int id) {
-            return View();
+        public ActionResult ChangePassword(string email, string password, string confirmPassword) {
+            bool result = false;
+            string username = "";//BUSCAR EL USUARIO QUE TIENE EL CODIGO "N" Y QUE TIENE EL CORREO email@example.com
+            //VALIDACIONES DE CONTRASENA
+            if (password == confirmPassword) {
+                //ENCRIPTAR LA CONTRASENA
+                string encryptedPassword = BC.HashPassword(password);
+                UserModel user = new UserModel() { Email = email, UserName = username, Password = encryptedPassword};
+                result = UserModel.UpdateUserPassword(user, db);
+            }
+            if (result)
+                return RedirectToAction("Index", "Home");
+            else
+                return RedirectToAction("UserCreate");
         }
 
         // POST: UserController/Edit/5
