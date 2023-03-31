@@ -104,7 +104,7 @@ namespace RegexApp.Models {
                     cmd.Connection.Open();
 
                     cmd.CommandText = "INSERT INTO " +
-                                      "tblUsers (FK_Users_Roles, Email, UserName, Password_, Enabled_, Email_Confirmed, Phone_Number_Confirmed, Two_Factor_Enabled, Lockout_Enabled) " +
+                                      "tblUsers (FK_Users_Roles, Email, UserName, Password_, Enabled_, Email_Confirmed, Phone_Number_Confirmed, Two_Factor_Enabled, Lockout_Enabled, Access_Failed_Count) " +
                                       "VALUES (@fkUserRole, @email, @username, @password, @enabled, @emailConfirmed, @phoneNumberConfirmed, @twoFactorEnabled, @lockoutEnabled, @accessFailedCount)";
                     cmd.Parameters.Add("@fkUserRole", SqlDbType.Int).Value = model.FK_Users_Roles;
                     cmd.Parameters.Add("@email", SqlDbType.NVarChar, 256).Value = model.Email;

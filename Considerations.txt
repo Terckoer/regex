@@ -1,0 +1,17 @@
+** ENCRIPTACION **
+
+La encriptación de los campos en una base de datos dependerá del tipo de datos que estés manejando y de los requisitos de seguridad específicos de tu aplicación o sistema. Sin embargo, aquí hay algunas sugerencias generales para los campos que pueden requerir encriptación:
+
+Contraseñas: Las contraseñas deben ser encriptadas para evitar que sean robadas y utilizadas para acceder a cuentas de usuario.
+
+Información de tarjetas de crédito: Los números de tarjeta de crédito y otra información de pago deben ser encriptados para proteger la información de los usuarios y cumplir con las normativas PCI-DSS.
+
+Información de identificación personal: Los números de seguridad social, números de identificación nacional u otros números de identificación personal deben ser encriptados para proteger la privacidad y evitar el robo de identidad.
+
+Información médica: La información médica confidencial, como los registros médicos y los resultados de las pruebas, deben ser encriptados para proteger la privacidad y cumplir con las normativas HIPAA.
+
+Información financiera: La información financiera confidencial, como los estados de cuenta bancarios y la información fiscal, debe ser encriptada para proteger la privacidad y cumplir con las normativas financieras.
+
+Es importante tener en cuenta que la encriptación puede tener un costo en términos de rendimiento y complejidad. Por lo tanto, es recomendable evaluar cuidadosamente qué campos necesitan ser encriptados y cómo implementar la encriptación de manera efectiva sin afectar el rendimiento del sistema.
+
+** ENCRIPTACION **

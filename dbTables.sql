@@ -10,7 +10,7 @@ CREATE TABLE tblUsers (
 	Enabled_ bit NOT NULL,
 	Two_Factor_Enabled bit NOT NULL,
 	Security_Stamp nvarchar(MAX),
-	Lockout_End_Date_Utc datetime
+	Lockout_End_Date_Utc datetime,
 	Lockout_Enabled bit NOT NULL,
 	Access_Failed_Count int
 )
