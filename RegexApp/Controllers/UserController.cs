@@ -15,8 +15,15 @@ namespace RegexApp.Controllers {
         }
 
         // GET: UserController
-        public ActionResult Index() {
-            return View("User");
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(UserModel user) {
+            if (UserModel.ValidateUser(user, db)) {
+                ViewData["username"] = user.UserName;
+                return View();
+            }
+            else
+                return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Details(int id) {
@@ -80,18 +87,6 @@ namespace RegexApp.Controllers {
             return View("UserCreate");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult ValidateLogin(UserModel user) {
-            if (UserModel.ValidateUser(user, db)) {
-                ViewData["username"] = user.UserName;
-                //HttpContext.Session.Id = "1234213";
-                return View("UserLogged");
-            } 
-            else 
-                return RedirectToAction("Index", "Home");
-        }
-
         public ActionResult Logout() {
             //CERRAR SESION, ELIMINAR COOKIES, TOKENS Y DEMAS COSAS QUE SIRVAN PARA VALIDAR SESION
             return RedirectToAction("Index", "Home");
@@ -115,16 +110,16 @@ namespace RegexApp.Controllers {
         }
 
         // POST: UserController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection) {
-            try {
-                return RedirectToAction(nameof(Index));
-            }
-            catch {
-                return View();
-            }
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit(int id, IFormCollection collection) {
+        //    try {
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch {
+        //        return View();
+        //    }
+        //}
 
         // GET: UserController/Delete/5
         public ActionResult Delete(int id) {
@@ -132,15 +127,15 @@ namespace RegexApp.Controllers {
         }
 
         // POST: UserController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection) {
-            try {
-                return RedirectToAction(nameof(Index));
-            }
-            catch {
-                return View();
-            }
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Delete(int id, IFormCollection collection) {
+        //    try {
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch {
+        //        return View();
+        //    }
+        //}
     }
 }
