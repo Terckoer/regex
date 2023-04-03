@@ -42,13 +42,23 @@ namespace RegexApp.Controllers {
             string validEmail = "";
             string validCode = "";
             if(userModel != null) {
+                /*
+                 Si la dirección de correo electrónico existe, debes generar un token único y aleatorio que se utilizará para identificar al usuario 
+                 y permitirle restablecer su contraseña. Este token debe tener una fecha de caducidad, por lo que debes almacenarlo junto con la fecha
+                 y hora de su creación en la base de datos. Puedes utilizar la función "NEWID()" en SQL Server para generar un token aleatorio.
+                 */
+                //OBTENER EL TOKEN TEMPORAL
+                TokenModel? tokenModel = TokenModel.GetToken(userModel.PK_Users, db);
+                //MANDAR AL CORREO UNA URL CON EL TOKEN 
                 validEmail = userModel.Email ?? "";
                 validCode = userModel.GetRandomNumber();
             }
-            ViewData["ValidCode"] = validCode;
-            
-            if (email == validEmail)//ENVIAR CODIGO AL emailValido
+
+            if (email == validEmail && validEmail != "") {//ENVIAR CODIGO AL emailValido
+                ViewData["ValidCode"] = validCode;
+                ViewData["ValidEmail"] = validEmail;
                 return View("UserValidateTempCode");//Esta vista seria la que se le manda al correo valido con una validez de 30 minutos
+            }
             
             return new ContentResult() { Content="Invalid Email"};
             
@@ -56,9 +66,9 @@ namespace RegexApp.Controllers {
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ValidateCode(string code, string validCode) {
+        public ActionResult ValidateCode(string code, string validCode, string validEmail) {
             //SET DE DATOS
-            // Validar si el codigo temporal del parametro existe
+            // Validar si el codigo temporal del parametro existe y el email
             if (code == validCode) {
                 return View("UserNewPassword");//Lo mando a ingresar su nueva contraseña 
             }
@@ -92,7 +102,8 @@ namespace RegexApp.Controllers {
             return RedirectToAction("Index", "Home");
         }
 
-        // GET: UserController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult ChangePassword(string email, string password, string confirmPassword) {
             bool result = false;
             string username = "";//BUSCAR EL USUARIO QUE TIENE EL CODIGO "N" Y QUE TIENE EL CORREO email@example.com

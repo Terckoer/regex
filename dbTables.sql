@@ -30,3 +30,12 @@ CREATE TABLE tblRoles (
 	Name_ VARCHAR(50) NOT NULL,
 	Description_ VARCHAR(255) NOT NULL
 )
+
+-- LAST UPDATE 03/04/2023 01:07PM
+CREATE TABLE tblTempTokens(
+	PK_Temp_Token int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	FK_TempTokens_Users int NOT NULL FOREIGN KEY REFERENCES tblUsers(PK_Users),
+	Token uniqueidentifier NOT NULL DEFAULT NEWID(),
+	Creation_Date datetime NOT NULL DEFAULT GETDATE(),
+	Expiration_Date datetime NOT NULL DEFAULT DATEADD(MINUTE,15, GETDATE()),
+)

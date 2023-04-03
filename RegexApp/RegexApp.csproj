@@ -27,4 +27,6 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.12" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1development_1json__JsonSchema="https://fasterci.com/config.schema.json" /></VisualStudio></ProjectExtensions>
+
 </Project>

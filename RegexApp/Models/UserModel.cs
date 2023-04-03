@@ -24,9 +24,7 @@ namespace RegexApp.Models {
         [Required(ErrorMessage = "The email address is required")]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string? Email { get; set; } = "";
-
         public bool EmailConfirmed { get; set; } = false;
-
         public string PhoneNumber { get; set; } = "";
         public bool PhoneNumberConfirmed { get; set; } = false;
         public bool Enabled { get; set; } = false;

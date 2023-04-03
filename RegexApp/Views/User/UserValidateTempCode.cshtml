@@ -10,7 +10,8 @@
         <div class="d-flex flex-column align-items-start w-25 mb-1">
             <label class="col-form-label fs-4" for="id-temp-code">6 Digits code</label>
             <input class="form-control" type="password" placeholder="code" id="id-temp-code" name="code" />
-            <input value=@ViewData["ValidCode"] class="form-control" type="hidden" name="validCode" />
+            <input value=@ViewData["ValidCode"] class="form-control" type="text" name="validCode" />
+            <input value=@ViewData["ValidEmail"] class="form-control" type="email" name="validEmail" />
         </div>
         <div class="w-25 mt-2">
             <input class="btn btn-success w-100" type="submit" value="Verify" />
