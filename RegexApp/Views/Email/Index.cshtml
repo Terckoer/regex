@@ -1,0 +1,25 @@
+﻿
+
+
+<div class="container">
+	<p class="text-black fs-3 text-center">Email</p>
+	<form class="d-flex flex-column align-items-center justify-content-center" method="post" asp-action="" asp-controller="">
+		<div class="d-flex flex-column w-25">
+			<label class="col-form-label " for="to">To</label>
+			<input class="form-control" type="email" id="to" name="to" placeholder="to" />
+		</div>
+		<div class="d-flex flex-column w-25">
+			<label class="col-form-label" for="subject">Subject</label>
+			<input class="form-control" type="text" id="subject" name="subject" placeholder="subject" />
+		</div>
+		<div class="d-flex flex-column w-25">
+			<label class="col-form-label" for="body">Body</label>
+			<textarea class="form-control" id="body" rows="5" name="body" placeholder="Message"></textarea>
+		</div>
+		<div class="d-flex flex-column w-25">
+			<input class="btn btn-primary mt-2 mb-2" type="submit" id="send" />
+		</div>
+	</form>
+</div>
+
+

@@ -39,41 +39,41 @@ namespace RegexApp.Controllers {
         public ActionResult ValidateEmail(string email) {
             //SET DE DATOS
             UserModel? userModel = UserModel.GetUser(email, db); // Validar si el email del parametro existe
-            string validEmail = "";
-            string validCode = "";
-            if(userModel != null) {
+            if (userModel != null && userModel.Email != null && email == userModel.Email) {
                 /*
                  Si la dirección de correo electrónico existe, debes generar un token único y aleatorio que se utilizará para identificar al usuario 
                  y permitirle restablecer su contraseña. Este token debe tener una fecha de caducidad, por lo que debes almacenarlo junto con la fecha
                  y hora de su creación en la base de datos. Puedes utilizar la función "NEWID()" en SQL Server para generar un token aleatorio.
                  */
-                //OBTENER EL TOKEN TEMPORAL
-                TokenModel? tokenModel = TokenModel.GetToken(userModel.PK_Users, db);
-                //MANDAR AL CORREO UNA URL CON EL TOKEN 
-                validEmail = userModel.Email ?? "";
-                validCode = userModel.GetRandomNumber();
-            }
+                //GENERAR EL TOKEN TEMPORAL
+                TokenModel? tokenModel = TokenModel.GetTokenByUser(userModel.PK_Users, db);
+                if (tokenModel == null) 
+                    TokenModel.AddToken(userModel.PK_Users, db);
 
-            if (email == validEmail && validEmail != "") {//ENVIAR CODIGO AL emailValido
-                ViewData["ValidCode"] = validCode;
-                ViewData["ValidEmail"] = validEmail;
-                return View("UserValidateTempCode");//Esta vista seria la que se le manda al correo valido con una validez de 30 minutos
+                //MANDAR AL CORREO UNA URL CON EL TOKEN 
+                return RedirectToAction("Index", "Home");//Esta vista seria la que se le manda al correo valido con una validez de 30 minutos
             }
-            
             return new ContentResult() { Content="Invalid Email"};
             
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult ValidateCode(string code, string validCode, string validEmail) {
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        [HttpGet]
+        public ActionResult ValidateCode(string token="") {
             //SET DE DATOS
             // Validar si el codigo temporal del parametro existe y el email
-            if (code == validCode) {
+            TokenModel? t = TokenModel.GetToken(token, db);
+            if (t != null) {
                 return View("UserNewPassword");//Lo mando a ingresar su nueva contraseña 
             }
             return new ContentResult() { Content = "The code is not valid" };
 
+        }
+
+        [HttpGet]
+        public ActionResult OtraUrl() {
+            return RedirectToAction("Index","Home");
         }
 
         [HttpPost]

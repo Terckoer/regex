@@ -10,25 +10,26 @@ namespace RegexApp.Models {
         public DateTime ExpirationDate { get; set; }
         public DateTime CreationDate { get; set; }
 
-        public static TokenModel? GetToken(int pkUser, Db db) {
+        public static TokenModel? GetTokenByUser(int pkUser, Db db) {
             SqlDataReader? reader = null;
             TokenModel? modelo = null;
             try {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = new SqlConnection(db.ConectionString);
                 cmd.Connection.Open();
-                cmd.CommandText = "SELECT PK_Temp_Token, FK_TempTokens_Users, Token, Creation_Date, Expiration_Date " +
+                cmd.CommandText = "SELECT TOP 1 PK_Temp_Token, FK_TempTokens_Users, Token, Creation_Date, Expiration_Date " +
                                   "FROM tblTempTokens " +
-                                  "WHERE FK_TempTokens_Users = @user";
+                                  "WHERE FK_TempTokens_Users = @user AND Expiration_Date > GETDATE() " +
+                                  "ORDER BY Expiration_Date DESC";
                 cmd.Parameters.Add("@user", SqlDbType.Int).Value = pkUser;
 
                 reader = cmd.ExecuteReader();
                 if (reader != null) {
-                    modelo = new TokenModel();
                     while (reader.Read()) {
+                        modelo = new TokenModel();
                         modelo.PkTempToken = reader.GetInt32(0);
                         modelo.FkTempTokenUsers = reader.GetInt32(1);
-                        modelo.Token= reader.GetString(2);
+                        modelo.Token = reader.GetString(2);
                         modelo.CreationDate= reader.GetDateTime(3);
                         modelo.ExpirationDate= reader.GetDateTime(4);
                     }
@@ -44,7 +45,44 @@ namespace RegexApp.Models {
             return modelo;
         }
 
+        public static TokenModel? GetToken(string token, Db db) {
+            SqlDataReader? reader = null;
+            TokenModel? modelo = null;
+            try {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = new SqlConnection(db.ConectionString);
+                cmd.Connection.Open();
+                cmd.CommandText = "SELECT TOP 1 PK_Temp_Token, FK_TempTokens_Users, Token, Creation_Date, Expiration_Date " +
+                                  "FROM tblTempTokens " +
+                                  "WHERE Token = @token AND Expiration_Date > GETDATE() " +
+                                  "ORDER BY Expiration_Date DESC";
+                Guid.TryParse(token, out Guid guid);
+                cmd.Parameters.Add("@token", SqlDbType.UniqueIdentifier).Value = guid;
+
+                reader = cmd.ExecuteReader();
+                if (reader != null) {
+                    while (reader.Read()) {
+                        modelo = new TokenModel();
+                        modelo.PkTempToken = reader.GetInt32(0);
+                        modelo.FkTempTokenUsers = reader.GetInt32(1);
+                        modelo.Token = reader.GetString(2);
+                        modelo.CreationDate = reader.GetDateTime(3);
+                        modelo.ExpirationDate = reader.GetDateTime(4);
+                    }
+                }
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex);
+            }
+            finally {
+                if (reader != null && !reader.IsClosed)
+                    reader.Close();
+            }
+            return modelo;
+        }
+
         public static bool AddToken(int pkUser, Db db) {
+            int result = 0;
             using (SqlCommand cmd = new SqlCommand()) 
             try {
                 cmd.Connection = new SqlConnection(db.ConectionString);
@@ -52,12 +90,12 @@ namespace RegexApp.Models {
                 cmd.CommandText = "INSERT INTO tblTempTokens(FK_TempTokens_Users) VALUES(@user)";
                 cmd.Parameters.Add("@user", SqlDbType.Int).Value = pkUser;
 
-                cmd.ExecuteNonQuery();
+                result=cmd.ExecuteNonQuery();
             }
             catch (Exception ex) {
                 Console.WriteLine(ex);
             }
-            return true;
+            return result > 0;
         }
     }
 }

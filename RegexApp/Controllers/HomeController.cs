@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RegexApp.Models;
 using System.Diagnostics;
+using System.Net.Mail;
+using System.Net.Mime;
+using System.Net;
 
 namespace RegexApp.Controllers {
     public class HomeController : Controller {
@@ -18,9 +21,14 @@ namespace RegexApp.Controllers {
             return View();
         }
 
+        public ActionResult Email() {
+            return View("Email");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error() {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }
