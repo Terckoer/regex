@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Net;
+using System.Configuration;
+using Microsoft.Extensions.Configuration;
 
 namespace RegexApp.Controllers {
     public class HomeController : Controller {
