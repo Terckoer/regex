@@ -20,7 +20,7 @@ namespace RegexApp.Models {
                 cmd.Connection.Open();
                 cmd.CommandText = "SELECT TOP 1 PK_Temp_Token, FK_TempTokens_Users, Token, Creation_Date, Expiration_Date, Enabled_ " +
                                   "FROM tblTempTokens " +
-                                  "WHERE FK_TempTokens_Users = @user AND Expiration_Date > GETDATE() " +
+                                  "WHERE FK_TempTokens_Users = @user AND Expiration_Date > GETDATE() AND Enabled_ = 1" +
                                   "ORDER BY Expiration_Date DESC";
                 cmd.Parameters.Add("@user", SqlDbType.Int).Value = pkUser;
 
@@ -55,9 +55,9 @@ namespace RegexApp.Models {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = new SqlConnection(db.ConectionString);
                 cmd.Connection.Open();
-                cmd.CommandText = "SELECT TOP 1 PK_Temp_Token, FK_TempTokens_Users, Token, Creation_Date, Expiration_Date " +
+                cmd.CommandText = "SELECT TOP 1 PK_Temp_Token, FK_TempTokens_Users, Token, Creation_Date, Expiration_Date, Enabled_ " +
                                   "FROM tblTempTokens " +
-                                  "WHERE Token = @token AND Expiration_Date > GETDATE() " +
+                                  "WHERE Token = @token AND Expiration_Date > GETDATE() AND Enabled_ = 1" +
                                   "ORDER BY Expiration_Date DESC";
                 cmd.Parameters.Add("@token", SqlDbType.UniqueIdentifier).Value = token;
 
@@ -70,6 +70,7 @@ namespace RegexApp.Models {
                         modelo.Token = reader.GetGuid(2);
                         modelo.CreationDate = reader.GetDateTime(3);
                         modelo.ExpirationDate = reader.GetDateTime(4);
+                        modelo.IsEnabled = reader.GetBoolean(5);
                     }
                 }
             }
@@ -99,5 +100,21 @@ namespace RegexApp.Models {
             }
             return result > 0;
         }
+
+        public static bool DisableToken(Guid token, Db db) {
+            try {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = new SqlConnection(db.ConectionString);
+                cmd.Connection.Open();
+                cmd.CommandText = "UPDATE tblTempTokens SET Enabled_ = 0 WHERE Token = @token";
+                cmd.Parameters.Add("@token", SqlDbType.UniqueIdentifier).Value = token;
+                return cmd.ExecuteNonQuery() > 0;
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex);
+                return false;
+            }
+        }
+
     }
 }

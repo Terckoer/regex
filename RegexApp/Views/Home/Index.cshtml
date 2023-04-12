@@ -8,7 +8,11 @@
     <div class="text-center">
         <p class="fs-1 fw-bold">Welcome</p>
     </div>
-
+    @if (TempData["ErrorMessage"] != null) {
+        <div class="alert alert-danger" role="alert">
+            @TempData["ErrorMessage"]
+        </div>
+    }
     <form class="d-flex flex-column align-items-center justify-content-center" method="post" asp-action="Index" asp-controller="User">
         <div class="d-flex flex-column align-items-start w-25 mb-1">
             <label class="col-form-label fs-3" for="id-username">Username</label>
@@ -21,7 +25,6 @@
                 <a asp-action="ResetPassword" asp-controller="User" class="link-primary" for="id-forgot-password">Forgot password?</a>
             </div>
             @Html.TextBoxFor(m => m.Password, new {@placeholder ="Password", @class = "form-control", @type="password"})
-            @*<input class="form-control" type="password" placeholder="Password" id="id-password" />*@
         </div>
         <div class="w-25 mb-2">
             <a asp-action="UserCreate" asp-controller="User" class="link-primary">New in RegexApp? Create an account.</a>

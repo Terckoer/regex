@@ -79,7 +79,7 @@ namespace RegexApp.Models {
                 cmd.CommandText = "SELECT u.PK_Users, u.Email, u.UserName " +
                                   "FROM tblUsers u " +
                                   "INNER JOIN tblTempTokens tk ON u.PK_Users = tk.FK_TempTokens_Users " +
-                                  "WHERE tk.Token = @token AND tk.Expiration_Date > GETDATE()";
+                                  "WHERE tk.Token = @token AND tk.Expiration_Date > GETDATE() AND tk.Enabled_ = 1";
                 cmd.Parameters.Add("@token", SqlDbType.UniqueIdentifier).Value = token;
 
                 reader = cmd.ExecuteReader();
@@ -100,6 +100,31 @@ namespace RegexApp.Models {
                     reader.Close();
             }
             return modelo;
+        }
+
+        public static bool ExistUser(UserModel user, Db db) {
+            SqlDataReader? reader = null;
+            bool result = false;
+
+            try {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = new SqlConnection(db.ConectionString);
+                cmd.Connection.Open();
+                cmd.CommandText = "SELECT UserName FROM tblUsers WHERE UserName=@username";
+                cmd.Parameters.Add("@username", SqlDbType.NVarChar, 256).Value = user.UserName;
+
+                reader = cmd.ExecuteReader();
+                if (reader != null && reader.Read()) 
+                    result = reader.GetString(0) == user.UserName;
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex);
+            }
+            finally {
+                if (reader != null && !reader.IsClosed)
+                    reader.Close();
+            }
+            return result;
         }
 
         public static bool ValidateUser(UserModel user, Db db) {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Metadata;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
 using RegexApp.Database;
 using RegexApp.Models;
 using System.Net;
@@ -25,8 +26,10 @@ namespace RegexApp.Controllers {
                 ViewData["username"] = user.UserName;
                 return View();
             }
-            else
+            else {
+                TempData["ErrorMessage"] = "Error al intentar validar el usuario.";
                 return RedirectToAction("Index", "Home");
+            }
         }
 
         public ActionResult Details(int id) {
@@ -42,8 +45,10 @@ namespace RegexApp.Controllers {
         public ActionResult ValidateEmail(string email) {
             //SET DE DATOS
             UserModel? userModel = UserModel.GetUser(email, db); // Validar si el email del parametro existe
-            if(userModel == null || userModel.Email == null || email != userModel.Email)
+            if(userModel == null || userModel.Email == null || email != userModel.Email) {
+                TempData["ErrorMessage"] = "Error validating the email";
                 return new ContentResult() { Content = "Invalid Email" };
+            }
                         
             //GENERAR EL TOKEN TEMPORAL
             TokenModel? tokenModel = TokenModel.GetTokenByUser(userModel.PK_Users, db);
@@ -51,7 +56,7 @@ namespace RegexApp.Controllers {
                 TokenModel.AddToken(userModel.PK_Users, db);
                 tokenModel = TokenModel.GetTokenByUser(userModel.PK_Users, db);
             }
-            if (tokenModel == null) 
+            if (tokenModel == null ) 
                 return new ContentResult() { Content = "An error has occurred generating the token" };
 
             string protocol = Request.HttpContext.Request.Scheme;
@@ -67,37 +72,61 @@ namespace RegexApp.Controllers {
             return View("Error");
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
         [HttpGet]
         public ActionResult ValidateCode(Guid token) {
             //SET DE DATOS
             // Validar si el codigo temporal del parametro existe y el email
-            
             TokenModel? t = TokenModel.GetToken(token, db);
-            if (t != null) {
-                return View("UserNewPassword", t);//Lo mando a ingresar su nueva contraseña 
+            if (t == null) {
+                TempData["ErrorMessage"] = "This token is expired or is not available anymore";
+                return View("UserNewPassword");//Lo mando a ingresar su nueva contraseña 
             }
-            return new ContentResult() { Content = "The code is not valid" };
-
+            return View("UserNewPassword", t);//Lo mando a ingresar su nueva contraseña 
         }
 
+        private string validaFormulario(IFormCollection form) {
+            string errorMessage = "";
+            foreach (var v in form) {
+                if(v.Value.ToString() == "") {
+                    errorMessage += $"Error, {v.Key} cannot be empty.\n";
+                }
+            }
+            return errorMessage;
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateUser(string username, string email, string password, string confirmPassword) {
+        public ActionResult CreateUser(IFormCollection form) { //string username, string email, string password, string confirmPassword
             bool result = false;
             //VALIDACIONES DE CONTRASENA
-            if(password == confirmPassword) {
-                //ENCRIPTAR LA CONTRASENA
-                string encryptedPassword = BC.HashPassword(password);
-                UserModel user = new UserModel() { FK_Users_Roles=2, Email = email, UserName = username, Password = encryptedPassword, Enabled = true};
-                result = UserModel.CreateUser(user, db);
-            }
-            if (result)
-                return RedirectToAction("Index", "Home");
-            else
+            string message = validaFormulario(form);
+            if (message != "") {
+                TempData["ErrorMessage"] = message;
                 return RedirectToAction("UserCreate");
+            }
+            
+            if (form["password"] != form["confirmPassword"]) {
+                TempData["ErrorMessage"] = "Error, the password and confirmation password does not match";
+                return RedirectToAction("UserCreate");
+            }
+            //ENCRIPTAR LA CONTRASENA
+            string encryptedPassword = BC.HashPassword(form["password"]);
+            UserModel user = new UserModel() { FK_Users_Roles=2, Email = form["email"], UserName = form["username"], Password = encryptedPassword, Enabled = true};
+            if(UserModel.ExistUser(user, db)) {
+                TempData["ErrorMessage"] = "The username has been already taken, try with another username";
+                return RedirectToAction("UserCreate");
+            }
+
+            result = UserModel.CreateUser(user, db);
+            if (result) {
+                TempData["SuccessMessage"] = $"The user {user.UserName} was created succesfully";
+                return RedirectToAction("UserCreate");
+            }
+            else {
+                //VALIDAR SI EL USUARIO YA EXISTE
+                TempData["ErrorMessage"] = "An error has occurred while creating the user";
+                return RedirectToAction("UserCreate");
+            }
         }
 
         public ActionResult UserCreate() {
@@ -112,8 +141,8 @@ namespace RegexApp.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ChangePassword(Guid token, string password, string confirmPassword) {
-            bool result = false;
             //VALIDACIONES DE CONTRASENA
+            bool isUpdateComplete = false;
             if (password != confirmPassword) {
                 ModelState.AddModelError("ConfirmPassword", "Passwords do not match"); 
                 return View("UserNewPassword");//Regresa a donde mismo CAMBIAR
@@ -127,15 +156,12 @@ namespace RegexApp.Controllers {
             }
 
             user.Password = encryptedPassword;
-            result = UserModel.UpdateUserPassword(user, db);
-
-            if(result)//SE HA ACTUALIZADO EL PASSWORD
+            isUpdateComplete = UserModel.UpdateUserPassword(user, db) && TokenModel.DisableToken(token, db);
+            
+            if(isUpdateComplete)//SE HA ACTUALIZADO EL PASSWORD MOSTRAR ALGUN TIPO DE ALERTA DE EXITO EN LA VISTA
                 return RedirectToAction("Index", "Home");
             else//
                 return RedirectToAction("Index", "Home");
-
-            // QUIERO UNA FUNCION QUE ME DEVUELVA LOS NUMEROS PRIMOS MENORES A 100
-
         }
 
 
