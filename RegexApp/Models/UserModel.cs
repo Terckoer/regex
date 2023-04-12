@@ -69,6 +69,39 @@ namespace RegexApp.Models {
             return modelo;
         }
 
+        public static UserModel? GetUserWithActiveToken(Guid token, Db db) {
+            SqlDataReader? reader = null;
+            UserModel? modelo = null;
+            try {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = new SqlConnection(db.ConectionString);
+                cmd.Connection.Open();
+                cmd.CommandText = "SELECT u.PK_Users, u.Email, u.UserName " +
+                                  "FROM tblUsers u " +
+                                  "INNER JOIN tblTempTokens tk ON u.PK_Users = tk.FK_TempTokens_Users " +
+                                  "WHERE tk.Token = @token AND tk.Expiration_Date > GETDATE()";
+                cmd.Parameters.Add("@token", SqlDbType.UniqueIdentifier).Value = token;
+
+                reader = cmd.ExecuteReader();
+                if (reader != null) {
+                    modelo = new UserModel();
+                    while (reader.Read()) {
+                        modelo.PK_Users = reader.GetInt32(0);
+                        modelo.Email = reader.GetString(1);
+                        modelo.UserName = reader.GetString(2);
+                    }
+                }
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex);
+            }
+            finally {
+                if (reader != null && !reader.IsClosed)
+                    reader.Close();
+            }
+            return modelo;
+        }
+
         public static bool ValidateUser(UserModel user, Db db) {
             SqlDataReader? reader = null;
             bool result = false;
@@ -137,9 +170,7 @@ namespace RegexApp.Models {
                 cmd.Parameters.Add("@email", SqlDbType.NVarChar, 256).Value = model.Email;
                 cmd.Parameters.Add("@username", SqlDbType.NVarChar, 256).Value = model.UserName;
                 cmd.Parameters.Add("@password", SqlDbType.NVarChar).Value = model.Password;
-
-                cmd.ExecuteNonQuery();
-                return true;
+                return cmd.ExecuteNonQuery()>0;
             }
             catch (Exception ex) {
                 Console.WriteLine(ex);

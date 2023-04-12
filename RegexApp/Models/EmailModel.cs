@@ -8,51 +8,40 @@ namespace RegexApp.Models {
     public class EmailModel {
 
         [Required, Display(Name = "Correo Destinatario"), EmailAddress]
-        public string EmailTo { get; set; } = "";
-
-        [Required, Display(Name = "Correo Remitente"), EmailAddress]
-        public string EmailFrom { get; set; } = "";
-
+        public string EmailTo { get; set; } = "";        
         [Required]
         public string Subject { get; set; } = "";
         public string Body { get; set; } = "";
+                
 
-        [Required]
-        [DataType(DataType.Password)]
-        public string Pass { get; set; } = "";
-
-
-        private static bool sendEmail(EmailModel model) {
+        public static bool SendEmail(EmailModel model, IConfiguration configuration) {
             MailMessage email = new MailMessage();
             SmtpClient smtp = new SmtpClient();
 
             email.To.Add(new MailAddress(model.EmailTo));
-            email.From = new MailAddress(model.EmailFrom);
+            email.From = new MailAddress(configuration.GetValue<string>("Smtp:email"));
             email.Subject = "Notificación ( " + DateTime.Now.ToString("dd / MMM / yyy hh:mm:ss") + " ) ";//model.subject
             email.SubjectEncoding = System.Text.Encoding.UTF8;
             email.Body = model.Body;
             email.IsBodyHtml = true;
             email.Priority = MailPriority.Normal;
-            //FileStream fs = new FileStream("E:\\TestFolder\\test.pdf", FileMode.Open, FileAccess.Read);
-            //Attachment a = new Attachment(fs, "test.pdf", MediaTypeNames.Application.Octet);
-            //email.Attachments.Add(a);
-
-            smtp.Host = "192.XXX.X.XXX";  // IP empresa/institucional
-                                          //smtp.Host = "smtp.hotmail.com";
-                                          //smtp.Host = "smtp.gmail.com";
-            smtp.Port = 25;
-            smtp.Timeout = 50;
-            smtp.EnableSsl = false;
+            
+            smtp.Host = configuration.GetValue<string>("Smtp:host");  // IP empresa/institucional
+                                                                      //smtp.Host = "smtp.hotmail.com";
+                                                                      //smtp.Host = "smtp.gmail.com";
+            smtp.Port = configuration.GetValue<int>("Smtp:PORT");
+            smtp.Timeout = 100000;
+            smtp.EnableSsl = true;
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new NetworkCredential("correo@origen.com", "password");
+            smtp.Credentials = new NetworkCredential(configuration.GetValue<string>("Smtp:emailAuth"), configuration.GetValue<string>("Smtp:passwordAuth"));
             
 
-            string lista = "ejemplo1@correo.com; ejemplo2@correo2.com;";
-            string output = string.Empty;
+            //string lista = "jorgejs.tech@gmail.com;";
+            string output = "";
 
-            var mails = lista.Split(';');
-            foreach (string dir in mails)
-                email.To.Add(dir);
+            //var mails = lista.Split(';');
+            //foreach (string dir in mails)
+            //    email.To.Add(dir);
 
             try {
                 smtp.Send(email);

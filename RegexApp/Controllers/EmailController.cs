@@ -33,11 +33,17 @@ namespace RegexApp.Controllers {
         public ActionResult Create(IFormCollection collection) {
             try {
                 EmailModel e = new EmailModel();
+                e.EmailTo = collection["to"];
+                e.Subject = collection["subject"];
+                e.Body = collection["body"];
+                
+                EmailModel.SendEmail(e, _configuration);
+                
                 
                 return RedirectToAction(nameof(Index));
             }
             catch {
-                return View();
+                return RedirectToAction("Index","Home");
             }
         }
 

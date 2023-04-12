@@ -6,7 +6,7 @@ namespace RegexApp.Models {
     public class TokenModel {
         public int PkTempToken { get; set; }
         public int FkTempTokenUsers { get; set; }
-        public string Token { get; set; } = "";
+        public Guid Token { get; set; }
         public DateTime ExpirationDate { get; set; }
         public DateTime CreationDate { get; set; }
 
@@ -29,7 +29,7 @@ namespace RegexApp.Models {
                         modelo = new TokenModel();
                         modelo.PkTempToken = reader.GetInt32(0);
                         modelo.FkTempTokenUsers = reader.GetInt32(1);
-                        modelo.Token = reader.GetString(2);
+                        modelo.Token = reader.GetGuid(2);
                         modelo.CreationDate= reader.GetDateTime(3);
                         modelo.ExpirationDate= reader.GetDateTime(4);
                     }
@@ -45,7 +45,7 @@ namespace RegexApp.Models {
             return modelo;
         }
 
-        public static TokenModel? GetToken(string token, Db db) {
+        public static TokenModel? GetToken(Guid token, Db db) {
             SqlDataReader? reader = null;
             TokenModel? modelo = null;
             try {
@@ -56,8 +56,7 @@ namespace RegexApp.Models {
                                   "FROM tblTempTokens " +
                                   "WHERE Token = @token AND Expiration_Date > GETDATE() " +
                                   "ORDER BY Expiration_Date DESC";
-                Guid.TryParse(token, out Guid guid);
-                cmd.Parameters.Add("@token", SqlDbType.UniqueIdentifier).Value = guid;
+                cmd.Parameters.Add("@token", SqlDbType.UniqueIdentifier).Value = token;
 
                 reader = cmd.ExecuteReader();
                 if (reader != null) {
@@ -65,7 +64,7 @@ namespace RegexApp.Models {
                         modelo = new TokenModel();
                         modelo.PkTempToken = reader.GetInt32(0);
                         modelo.FkTempTokenUsers = reader.GetInt32(1);
-                        modelo.Token = reader.GetString(2);
+                        modelo.Token = reader.GetGuid(2);
                         modelo.CreationDate = reader.GetDateTime(3);
                         modelo.ExpirationDate = reader.GetDateTime(4);
                     }

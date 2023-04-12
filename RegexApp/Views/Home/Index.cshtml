@@ -9,7 +9,7 @@
         <p class="fs-1 fw-bold">Welcome</p>
     </div>
 
-    <form class="d-flex flex-column align-items-center justify-content-center" asp-action="Index" asp-controller="User" method="post">
+    <form class="d-flex flex-column align-items-center justify-content-center" method="post" asp-action="Index" asp-controller="User">
         <div class="d-flex flex-column align-items-start w-25 mb-1">
             <label class="col-form-label fs-3" for="id-username">Username</label>
             @Html.TextBoxFor(m => m.UserName, new {@placeholder = "Username",  @class = "form-control", @id = "id-username"})
