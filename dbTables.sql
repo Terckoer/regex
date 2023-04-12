@@ -38,4 +38,5 @@ CREATE TABLE tblTempTokens(
 	Token uniqueidentifier NOT NULL DEFAULT NEWID(),
 	Creation_Date datetime NOT NULL DEFAULT GETDATE(),
 	Expiration_Date datetime NOT NULL DEFAULT DATEADD(MINUTE,15, GETDATE()),
+	Enabled_ bit NOT NULL DEFAULT 1
 )
