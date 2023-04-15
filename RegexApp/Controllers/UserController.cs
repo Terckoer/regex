@@ -27,7 +27,7 @@ namespace RegexApp.Controllers {
                 return View();
             }
             else {
-                TempData["ErrorMessage"] = "Error al intentar validar el usuario.";
+                TempData["ErrorMessage"] = "Your password is incorrect or this user doesn't exist.";
                 return RedirectToAction("Index", "Home");
             }
         }
@@ -104,7 +104,6 @@ namespace RegexApp.Controllers {
                 TempData["ErrorMessage"] = message;
                 return RedirectToAction("UserCreate");
             }
-            
             if (form["password"] != form["confirmPassword"]) {
                 TempData["ErrorMessage"] = "Error, the password and confirmation password does not match";
                 return RedirectToAction("UserCreate");
@@ -123,7 +122,6 @@ namespace RegexApp.Controllers {
                 return RedirectToAction("UserCreate");
             }
             else {
-                //VALIDAR SI EL USUARIO YA EXISTE
                 TempData["ErrorMessage"] = "An error has occurred while creating the user";
                 return RedirectToAction("UserCreate");
             }
