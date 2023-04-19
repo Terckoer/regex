@@ -1,24 +1,38 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using RegexApp.Database;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => {
+    // Configuración de opciones de cookies
+    options.LoginPath = "/Home";
+    options.AccessDeniedPath = "/Home/Privacy";
+});
 
+//builder.Services.AddMvc(options => {
+//    var policy = new AuthorizationPolicyBuilder()
+//        .RequireAuthenticatedUser()
+//        .Build();
+//    options.Filters.Add(new AuthorizeFilter(policy));
+//});
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options => {
     options.IdleTimeout = TimeSpan.FromSeconds(10);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
 });
+
 
 //Add a unique instance of type "Db" in the constructor to use for the rest of the time while the app is running
 builder.Services.AddSingleton(new Db(builder.Configuration.GetConnectionString("conn")));
 
-//var conn = builder.Configuration["ConnectionStrings:conn"];
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -35,7 +49,6 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.UseSession();
-
 
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 

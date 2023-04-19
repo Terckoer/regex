@@ -15,7 +15,7 @@ namespace RegexApp.Models {
         public int FK_Users_Roles { get; set; } = 0;
 
         [Required(ErrorMessage = "Please enter your username"), MaxLength(256)]
-        public string? UserName { get; set; } = "";
+        public string? Username { get; set; } = "";
 
         [Required(ErrorMessage = "Please enter your password")]
         public string? Password { get; set; } = "";
@@ -53,7 +53,7 @@ namespace RegexApp.Models {
                         modelo.PK_Users = reader.GetInt32(0);
                         modelo.FK_Users_Roles = reader.GetInt32(1);
                         modelo.Email = reader.GetString(2);
-                        modelo.UserName = reader.GetString(3);
+                        modelo.Username = reader.GetString(3);
                         modelo.Password = reader.GetString(4);
                         modelo.Enabled = reader.GetBoolean(5);
                     }
@@ -88,7 +88,7 @@ namespace RegexApp.Models {
                     while (reader.Read()) {
                         modelo.PK_Users = reader.GetInt32(0);
                         modelo.Email = reader.GetString(1);
-                        modelo.UserName = reader.GetString(2);
+                        modelo.Username = reader.GetString(2);
                     }
                 }
             }
@@ -111,11 +111,11 @@ namespace RegexApp.Models {
                 cmd.Connection = new SqlConnection(db.ConectionString);
                 cmd.Connection.Open();
                 cmd.CommandText = "SELECT UserName FROM tblUsers WHERE UserName=@username";
-                cmd.Parameters.Add("@username", SqlDbType.NVarChar, 256).Value = user.UserName;
+                cmd.Parameters.Add("@username", SqlDbType.NVarChar, 256).Value = user.Username;
 
                 reader = cmd.ExecuteReader();
                 if (reader != null && reader.Read()) 
-                    result = reader.GetString(0) == user.UserName;
+                    result = reader.GetString(0) == user.Username;
             }
             catch (Exception ex) {
                 Console.WriteLine(ex);
@@ -136,7 +136,7 @@ namespace RegexApp.Models {
                 cmd.Connection = new SqlConnection(db.ConectionString);
                 cmd.Connection.Open();
                 cmd.CommandText = "SELECT UserName, Password_ FROM tblUsers WHERE UserName=@username AND Enabled_=1";
-                cmd.Parameters.Add("@username", SqlDbType.NVarChar, 256).Value = user.UserName;
+                cmd.Parameters.Add("@username", SqlDbType.NVarChar, 256).Value = user.Username;
 
                 reader = cmd.ExecuteReader();
                 if (reader != null && reader.Read()) {
@@ -164,7 +164,7 @@ namespace RegexApp.Models {
                                       "VALUES (@fkUserRole, @email, @username, @password, @enabled, @emailConfirmed, @phoneNumberConfirmed, @twoFactorEnabled, @lockoutEnabled, @accessFailedCount)";
                     cmd.Parameters.Add("@fkUserRole", SqlDbType.Int).Value = model.FK_Users_Roles;
                     cmd.Parameters.Add("@email", SqlDbType.NVarChar, 256).Value = model.Email;
-                    cmd.Parameters.Add("@username", SqlDbType.NVarChar, 256).Value = model.UserName;
+                    cmd.Parameters.Add("@username", SqlDbType.NVarChar, 256).Value = model.Username;
                     cmd.Parameters.Add("@password", SqlDbType.NVarChar).Value = model.Password;
                     cmd.Parameters.Add("@enabled", SqlDbType.Bit).Value = model.Enabled;
                     cmd.Parameters.Add("@emailConfirmed", SqlDbType.Bit).Value = model.EmailConfirmed;
@@ -193,7 +193,7 @@ namespace RegexApp.Models {
 
                 cmd.CommandText = "UPDATE tblUsers SET Password_ = @password WHERE Email = @email AND Username = @username";
                 cmd.Parameters.Add("@email", SqlDbType.NVarChar, 256).Value = model.Email;
-                cmd.Parameters.Add("@username", SqlDbType.NVarChar, 256).Value = model.UserName;
+                cmd.Parameters.Add("@username", SqlDbType.NVarChar, 256).Value = model.Username;
                 cmd.Parameters.Add("@password", SqlDbType.NVarChar).Value = model.Password;
                 return cmd.ExecuteNonQuery()>0;
             }

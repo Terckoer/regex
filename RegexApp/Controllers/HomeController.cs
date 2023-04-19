@@ -6,15 +6,12 @@ using System.Net.Mime;
 using System.Net;
 using System.Configuration;
 using Microsoft.Extensions.Configuration;
+using System.Text.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RegexApp.Controllers {
     public class HomeController : Controller {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger) {
-            _logger = logger;
-        }
-
+          
         public IActionResult Index() {
             return View();
         }

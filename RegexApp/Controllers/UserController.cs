@@ -1,14 +1,17 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Metadata;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using RegexApp.Database;
 using RegexApp.Models;
 using System.Net;
+using System.Text.Json;
 using System.Xml.Linq;
 using BC = BCrypt.Net.BCrypt;
 
 namespace RegexApp.Controllers {
+    [Authorize]
     public class UserController : Controller {
 
         private readonly Db db;
@@ -22,9 +25,18 @@ namespace RegexApp.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index(UserModel user) {
-            if (UserModel.ValidateUser(user, db)) {
-                ViewData["username"] = user.UserName;
-                return View();
+
+            if (UserModel.ValidateUser(user, db) && user.Username != null) {
+                //CookieOptions opcionesCookie = new CookieOptions {
+                //    Expires = DateTime.Now.AddDays(7),
+                //    Domain = "",
+                //    Path = "/",
+                //    Secure = true,
+                //    HttpOnly = true
+                //};
+                //string json = JsonSerializer.Serialize(user);
+                //HttpContext.Response.Cookies.Append(user.Username, json, opcionesCookie);
+                return View(user);
             }
             else {
                 TempData["ErrorMessage"] = "Your password is incorrect or this user doesn't exist.";
@@ -110,7 +122,7 @@ namespace RegexApp.Controllers {
             }
             //ENCRIPTAR LA CONTRASENA
             string encryptedPassword = BC.HashPassword(form["password"]);
-            UserModel user = new UserModel() { FK_Users_Roles=2, Email = form["email"], UserName = form["username"], Password = encryptedPassword, Enabled = true};
+            UserModel user = new UserModel() { FK_Users_Roles=2, Email = form["email"], Username = form["username"], Password = encryptedPassword, Enabled = true};
             if(UserModel.ExistUser(user, db)) {
                 TempData["ErrorMessage"] = "The username has been already taken, try with another username";
                 return RedirectToAction("UserCreate");
@@ -118,7 +130,7 @@ namespace RegexApp.Controllers {
 
             result = UserModel.CreateUser(user, db);
             if (result) {
-                TempData["SuccessMessage"] = $"The user {user.UserName} was created succesfully";
+                TempData["SuccessMessage"] = $"The user {user.Username} was created succesfully";
                 return RedirectToAction("UserCreate");
             }
             else {
