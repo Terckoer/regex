@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RegexApp.Models;
 using System.Configuration;
@@ -7,6 +8,7 @@ using System.Net.Mail;
 using System.Net.Mime;
 
 namespace RegexApp.Controllers {
+    [Authorize]
     public class EmailController : Controller {
         // GET: EmailController
         private readonly IConfiguration _configuration;

@@ -13,7 +13,7 @@
             @TempData["ErrorMessage"]
         </div>
     }
-    <form asp-action="Index" asp-controller="User" class="d-flex flex-column align-items-center justify-content-center" method="post">
+    <form asp-action="Login" asp-controller="Home" class="d-flex flex-column align-items-center justify-content-center" method="post">
         <div class="d-flex flex-column align-items-start w-25 mb-1">
             <label class="col-form-label fs-3" for="id-username">Username</label>
             <input asp-for="Username" class="form-control" type="text" placeholder="Username" id="id-username" required />

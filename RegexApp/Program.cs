@@ -10,8 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => {
     // Configuración de opciones de cookies
-    options.LoginPath = "/Home";
-    options.AccessDeniedPath = "/Home/Privacy";
+    options.LoginPath = "/Home/Privacy";
+    options.AccessDeniedPath = "/Home/Error";
+    options.Cookie.Name = "CookieName";
 });
 
 builder.Services.AddDistributedMemoryCache();

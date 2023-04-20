@@ -20,13 +20,13 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-controller="Email" asp-action="Index">Email</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Email" asp-action="Index">Email</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Error">Error</a>
                         </li>
                     </ul>
                 </div>
@@ -35,9 +35,7 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            @if(Model != null && Model.Username != null){
-                                @Model.Username
-                            }
+                            fake username 
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Summary</a></li>
