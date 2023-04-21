@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using RegexApp.Database;
 using System.Security.Claims;
+using NuGet.Protocol;
 
 namespace RegexApp.Controllers {
     public class HomeController : Controller {
@@ -25,32 +26,39 @@ namespace RegexApp.Controllers {
         }
 
         public IActionResult Index() {
+            CargarViewBags();
             return View();
         }
 
         public IActionResult Privacy() {
+            CargarViewBags();
             return View();
         }
 
         // GET: UserController
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(UserModel user) {
+        public async Task<ActionResult> Login(UserModel user) {
             if (UserModel.ValidateUser(user, _db) && user.Username != null) {
-
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, "NombreUsuario"),
-                    new Claim(ClaimTypes.Email, "usuario@dominio.com")
+                List<Claim> claims = new List<Claim> { 
+                    new Claim(ClaimTypes.Name, user.Username) 
                 };
 
-                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-                var authProperties = new AuthenticationProperties {
-                    IsPersistent = true
+                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                AuthenticationProperties authProperties = new AuthenticationProperties {
+                    IsPersistent = true,
                 };
-                HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+                HttpContext.Session.SetString("username", user.Username);
                 
+                if (Request.Cookies["username"] == null) {
+                    var cookieOptions = new CookieOptions {
+                        Expires = DateTime.UtcNow.AddDays(7),
+                        IsEssential = true 
+                    };
+                    Response.Cookies.Append("username", user.Username, cookieOptions);
+                }
+
                 return RedirectToAction("Index", "User");
             }
             else {
@@ -59,13 +67,24 @@ namespace RegexApp.Controllers {
             }
         }
 
-        public ActionResult Email() {
-            return View("Email");
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Logout(UserModel user) {
+            await HttpContext.SignOutAsync();
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");    
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error() {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public void CargarViewBags() {
+            string? miCookie = Request.Cookies["authenticatedUser"];
+            if (miCookie != null) { 
+                ViewBag.Username = Request.Cookies["username"];
+            }
         }
 
     }

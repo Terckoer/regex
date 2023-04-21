@@ -19,6 +19,7 @@ namespace RegexApp.Controllers {
         }
 
         public ActionResult Index() {
+            CargarViewBags();
             return View();
         }
 
@@ -48,9 +49,12 @@ namespace RegexApp.Controllers {
                 return RedirectToAction("Index","Home");
             }
         }
-
-
         
-
+        public void CargarViewBags() {
+            string? miCookie = Request.Cookies["authenticatedUser"];
+            if (miCookie != null) {
+                ViewBag.Username = Request.Cookies["username"];
+            }
+        }
     }
 }

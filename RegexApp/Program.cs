@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using RegexApp.Database;
@@ -10,14 +11,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => {
     // Configuración de opciones de cookies
-    options.LoginPath = "/Home/Privacy";
+    options.LoginPath = "/Home";
     options.AccessDeniedPath = "/Home/Error";
-    options.Cookie.Name = "CookieName";
+    options.Cookie.Name = "authenticatedUser";
+    options.Cookie.IsEssential = true;
 });
-
 builder.Services.AddDistributedMemoryCache();
+
 builder.Services.AddSession(options => {
-    options.IdleTimeout = TimeSpan.FromSeconds(10);
+    options.IdleTimeout = TimeSpan.FromSeconds(100);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
@@ -40,9 +42,12 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthorization();
 
+app.UseAuthentication();
+app.UseAuthorization();
+app.UseCookiePolicy();
 app.UseSession();
+
 
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 

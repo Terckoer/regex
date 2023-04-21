@@ -1,19 +1,11 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Metadata;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Primitives;
 using RegexApp.Database;
 using RegexApp.Models;
-using System.Net;
-using System.Security.Claims;
-using System.Text.Json;
-using System.Xml.Linq;
 using BC = BCrypt.Net.BCrypt;
 
 namespace RegexApp.Controllers {
+    [Authorize]
     public class UserController : Controller {
 
         private readonly Db _db;
@@ -24,9 +16,15 @@ namespace RegexApp.Controllers {
         }
 
         // GET: /User
-        [HttpGet]
         public ActionResult Index() {
-            return View();
+            // El usuario está autenticado
+            if (User != null && User.Identity != null && User.Identity.IsAuthenticated) {
+                CargarViewBags();
+                return View();
+            }// El usuario no está autenticado
+            else {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         public ActionResult Details(int id) {
@@ -163,6 +161,13 @@ namespace RegexApp.Controllers {
         // GET: UserController/Delete/5
         public ActionResult Delete(int id) {
             return View();
+        }
+
+        public void CargarViewBags() {
+            string? miCookie = Request.Cookies["authenticatedUser"];
+            if (miCookie != null) {
+                ViewBag.Username = Request.Cookies["username"];
+            }
         }
 
     }
