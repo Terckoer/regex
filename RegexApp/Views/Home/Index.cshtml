@@ -2,35 +2,23 @@
     ViewData["Title"] = "Home Page";   
 }
 
-@model UserModel
 
-<div class="text-center">
-    <div class="text-center">
-        <p class="fs-1 fw-bold">Welcome</p>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Welcome to my website</h1>
+            <p>Thanks for visiting my welcome page! Here you will find information about me and what I do.</p>
+            <p>Do not hesitate to explore the site and learn more about me. If you have any questions or comments, feel free to contact me.</p>
+            <p>Here are some cool things you can find on my website:</p>
+            <ul>
+                <li>My educational and professional history</li>
+                <li>My portfolio of projects</li>
+                <li>My skills and competencies</li>
+                <li>My personal blog</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <img src="https://via.placeholder.com/500x300" alt="Imagen de Bienvenida" class="img-fluid">
+        </div>
     </div>
-    @if (TempData["ErrorMessage"] != null) {
-        <div class="alert alert-danger" role="alert">
-            @TempData["ErrorMessage"]
-        </div>
-    }
-    <form asp-action="Login" asp-controller="Home" class="d-flex flex-column align-items-center justify-content-center" method="post">
-        <div class="d-flex flex-column align-items-start w-25 mb-1">
-            <label class="col-form-label fs-3" for="id-username">Username</label>
-            <input asp-for="Username" class="form-control" type="text" placeholder="Username" id="id-username" required />
-            <span asp-validation-for="Username" class="text-danger"></span>
-        </div>
-        <div class="d-flex flex-column align-items-start w-25 mb-2">
-            <div class="d-flex flex-row align-items-center justify-content-between w-100">
-                <label class="col-form-label fs-3" for="id-password" >Password</label>
-                <a asp-action="ResetPassword" asp-controller="User" class="link-primary" for="id-forgot-password">Forgot password?</a>
-            </div>
-            <input asp-for="Password" type="password" class="form-control" placeholder="Password" id="id-password" required />
-        </div>
-        <div class="w-25 mb-2">
-            <a asp-action="UserCreate" asp-controller="User" class="link-primary">New in RegexApp? Create an account.</a>
-        </div>
-        <div class="w-25 mt-2">
-            <input class="btn btn-primary w-100" type="submit" value="SIGN IN" />
-        </div>
-    </form>
 </div>

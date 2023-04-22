@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => {
     // Configuración de opciones de cookies
-    options.LoginPath = "/Home";
+    options.LoginPath = "/Login";
     options.AccessDeniedPath = "/Home/Error";
     options.Cookie.Name = "authenticatedUser";
     options.Cookie.IsEssential = true;
