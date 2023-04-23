@@ -47,10 +47,11 @@ namespace RegexApp.Controllers {
         public ActionResult UserCreate() {
             return View("UserCreate");
         }
-        // GET: UserController
+
+        // POST: /Home/ValidateUser
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(UserModel user) {
+        public async Task<ActionResult> ValidateUser(UserModel user) {
             if (UserModel.ValidateUser(user, _db) && user.Username != null) {
                 List<Claim> claims = new List<Claim> { 
                     new Claim(ClaimTypes.Name, user.Username) 
@@ -75,7 +76,7 @@ namespace RegexApp.Controllers {
             }
             else {
                 TempData["ErrorMessage"] = "Your password is incorrect or this user doesn't exist.";
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Home");
             }
         }
 

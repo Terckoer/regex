@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/RegexApp.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body class="w-100 mw-100 p-0">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -57,11 +57,12 @@
                     </ul>
                 }else{
                     <a class="btn btn-outline-primary text-nowrap" asp-action="Login" asp-controller="Home"><span>Sign in</span></a>
+                    <a class="btn btn-outline-success text-nowrap ms-3" asp-action="UserCreate" asp-controller="Home"><span>Sign up</span></a>
                 }
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container w-100 mw-100 p-0">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
