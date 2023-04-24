@@ -2,59 +2,361 @@
     ViewData["Title"] = "Welcome ";
 
 }
-<div class="container-fluid border border-primary w-100 mw-100">
-	<div class="row">
-		<nav class="col-md-2 d-none d-md-block bg-light sidebar">
-			<div class="sidebar-sticky">
-				<ul class="nav flex-column">
-					<li class="nav-item">
-						<a class="nav-link active" href="#">Dashboard</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Option 1</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Option 2</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Option 3</a>
-					</li>
-				</ul>
-			</div>
-		</nav>
-		<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-			<header class="bg-dark text-white p-4">
-				<h1 class="text-center">Dashboard</h1>
-			</header>
-			<div class="container my-5">
-				<div class="row">
-					<div class="col-lg-4 mb-4">
-						<div class="card">
-							<div class="card-body">
-								<h2 class="card-title">Card 1</h2>
-								<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae eros velit. Nulla euismod semper orci, et volutpat nisl efficitur vel.</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 mb-4">
-						<div class="card">
-							<div class="card-body">
-								<h2 class="card-title">Card 2</h2>
-								<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae eros velit. Nulla euismod semper orci, et volutpat nisl efficitur vel.</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 mb-4">
-						<div class="card">
-							<div class="card-body">
-								<h2 class="card-title">Card 3</h2>
-								<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae eros velit. Nulla euismod semper orci, et volutpat nisl efficitur vel.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</main>
-	</div>
+<div class="container-fluid d-flex flex-column">
+    <div class="row w-100">
+        <aside class="d-flex bg-light sidebar w-25 ">
+
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Regular Expression</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Words</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Numbers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Any digit</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Any Non-digit character</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Any character</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">[ThisCharacters]</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">[^NotThisCharacters]</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Ranges: [a-z], [a-d], [B-F]</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Numbers Ranges: [0-9], [3-7]</a>
+                    </li>
+                </ul>
+            </div>
+
+        </aside>
+
+        <div class="d-flex w-75 flex-column p-0 m-0">
+            <div class="bg-dark text-white p-0 m-0">
+                <h1 class="text-center">Dashboard</h1>
+            </div>
+            <div class="container my-5">
+                <div class="row">
+                    <div class="col-lg-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">Card 1</h2>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae eros velit. Nulla euismod semper orci, et volutpat nisl efficitur vel.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">Card 2</h2>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae eros velit. Nulla euismod semper orci, et volutpat nisl efficitur vel.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">Card 3</h2>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae eros velit. Nulla euismod semper orci, et volutpat nisl efficitur vel.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-dark">
+        <div class="card card-body">
+            <a class="link-primary" data-bs-toggle="collapse" href="#basic-level" role="button" aria-expanded="false" aria-controls="basic-level">
+                Basic Level
+            </a>
+            <div class="collapse" id="basic-level">
+                <ol>
+                    <li>
+                        <a class="link-secondary" data-bs-toggle="collapse" href="#concept" role="button" aria-expanded="false" aria-controls="concept">
+                            Introduction to regular expressions:
+                        </a>
+                        <ul class="collapse" id="concept">
+                            <li>
+                                <a href="#">
+                                    Concept of regular expression. Example: /pattern/
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="link-secondary" data-bs-toggle="collapse" href="#literals" role="button" aria-expanded="false" aria-controls="literals">
+                            Literal characters and basic metacharacters:
+                        </a>
+                        <ul class="collapse" id="literals">
+                            <li>
+                                <a href="#">
+                                    Literal characters. Example: /hello/
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Dots and wildcards. Example: /h.ll/
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Asterisk and plus sign. Example: /ho*l/
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="link-secondary" data-bs-toggle="collapse" href="#characters" role="button" aria-expanded="false" aria-controls="characters">
+                            Character classes and escape characters:
+                        </a>
+                        <ul class="collapse" id="characters">
+                            <li>
+                                <a href="#">
+                                    Character classes. Example: /[aeiou]/
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Escape characters. Example: /h\.ll/
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="link-secondary" data-bs-toggle="collapse" href="#boundaries" role="button" aria-expanded="false" aria-controls="boundaries">
+                            Anchors and expression boundaries:
+                        </a>
+                        <ul class="collapse" id="boundaries">
+                            <li>
+                                <a href="#">
+                                    Anchors. Example: /^h/
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Expression boundaries. Example: /ll$/
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="link-secondary" data-bs-toggle="collapse" href="#quantifiers" role="button" aria-expanded="false" aria-controls="quantifiers">
+                            Basic quantifiers:
+                        </a>
+                        <ul class="collapse" id="quantifiers">
+                            <li>
+                                <a href="#">
+                                    Quantifiers. Example: /ho{2}l/
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="link-secondary" data-bs-toggle="collapse" href="#groups" role="button" aria-expanded="false" aria-controls="groups">
+                            Capturing and non-capturing groups:
+                        </a>
+                        <ul class="collapse" id="groups">
+                            <li>
+                                <a href="#">
+                                    Capturing groups. Example: /ho(ll|p)l/
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="link-secondary" data-bs-toggle="collapse" href="#options" role="button" aria-expanded="false" aria-controls="options">
+                            Alternations and options:
+                        </a>
+                        <ul class="collapse" id="options">
+                            <li>
+                                <a href="#">
+                                    Alternations. Example: /(cat|dog)/
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="link-secondary" data-bs-toggle="collapse" href="#validation" role="button" aria-expanded="false" aria-controls="validation">
+                            Practical examples with text format validation:
+                        </a>
+                        <ul class="collapse" id="validation">
+                            <li>
+                                <a href="#">
+                                    Email validation. Example: /^[A-Z0-9._%+-]+@@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+            <a class="link-primary" data-bs-toggle="collapse" href="#intermediate-level" role="button" aria-expanded="false" aria-controls="intermediate-level">
+                Intermediate Level
+            </a>
+            <div class="collapse" id="intermediate-level">
+                <ol>
+                    <li>
+                        <a class="link-secondary" data-bs-toggle="collapse" href="#adv-quantifiers" role="button" aria-expanded="false" aria-controls="adv-quantifiers">
+                            Advanced quantifiers:
+                        </a>
+                        <ul class="collapse" id="adv-quantifiers">
+                            <li>
+                                <a href="#">
+                                    Optional. Example: /ho?l/
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Obligatory. Example: /ho+l/
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Repetition. Example: /ho{2,4}l/
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="link-secondary" data-bs-toggle="collapse" href="#conditional" role="button" aria-expanded="false" aria-controls="conditional">
+                            Conditional regular expressions:
+                        </a>
+                        <ul class="collapse" id="conditional">
+                            <li>
+                                <a href="#">
+                                    Conditional regular expressions. Example: /hello(?= world)/
+                                </a>
+                            </li>
+                        </ul>
+                        
+                    </li>
+                    <li>
+                        <a class="link-secondary" data-bs-toggle="collapse" href="#references" role="button" aria-expanded="false" aria-controls="references">
+                            Backreferences and subpattern references:
+                        </a>
+                        <ul class="collapse" id="references">
+                            <li>
+                                <a href="#">
+                                    Backreferences. Example: /(\d{3})-\1-\d{4}/
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="link-secondary" data-bs-toggle="collapse" href="#negative-regex" role="button" aria-expanded="false" aria-controls="negative-regex">
+                            Negative regular expressions:
+                        </a>
+                        <ul class="collapse" id="negative-regex">
+                            <li>
+                                <a href="#">
+                                    Negation. Example: /\b(?!no)\w+\b/
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Lookahead. Example: /hello(?= world)/
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Lookbehind. Example: /(?<=hello )world/
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="link-secondary" data-bs-toggle="collapse" href="#flags" role="button" aria-expanded="false" aria-controls="flags">
+                            Advanced modifiers and flags:
+                        </a>
+                        <ul class="collapse" id="flags">
+                            <li>
+                                <a href="#">
+                                    Multiline mode. Example: /(?m)^h/
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Unicode. Example: /p{L}/u
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="link-secondary" data-bs-toggle="collapse" href="#information-extraction" role="button" aria-expanded="false" aria-controls="information-extraction">
+                            Practical examples with information extraction:
+                        </a>
+                        <ul class="collapse" id="information-extraction">
+                            <li>
+                                <a href="#">
+                                    Extraction of URLs. Example: /https?:\/\/[\w\-\.]+\.\w{2,5}(\/[\w\-\.\?\#\=]*)?/i
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+            <a class="link-primary" data-bs-toggle="collapse" href="#advanced-Level" role="button" aria-expanded="false" aria-controls="advanced-Level">
+                advanced-Level
+            </a>
+            <div class="collapse" id="advanced-Level">
+                <ol>
+                    <li>
+                        <a class="link-secondary" data-bs-toggle="collapse" href="#advanced-grammars" role="button" aria-expanded="false" aria-controls="advanced-grammars">
+                            Construction of complete grammars with regular expressions:
+                        </a>
+                        <ul class="collapse" id="advanced-grammars">
+                            <li>
+                                <a href="#">
+                                    Complete grammars. Example: /^(\d{3})-(\d{2})-(\d{4})-(\d{2})-(\d{2})$/
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="link-secondary" data-bs-toggle="collapse" href="#optimization-efficiency" role="button" aria-expanded="false" aria-controls="optimization-efficiency">
+                            Optimization and efficiency of regular expressions:
+                        </a>
+                        <ul class="collapse" id="optimization-efficiency">
+                            <li>
+                                <a href="#">
+                                    Optimization. Example: /^h.*l$/
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Efficiency. Example: /\b\w{4,}\b/
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="link-secondary" data-bs-toggle="collapse" href="#regex-programming" role="button" aria-expanded="false" aria-controls="regex-programming">
+                            Regular expressions in programming languages:
+                        </a>
+                        <ul class="collapse" id="regex-programming">
+                            <li>
+                                <a href="#">
+                                    Regular expressions in programming languages. Example: import regex
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+    </div>
 </div>
 

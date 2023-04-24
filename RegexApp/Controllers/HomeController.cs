@@ -14,7 +14,7 @@ using RegexApp.Database;
 using System.Security.Claims;
 using NuGet.Protocol;
 using BC = BCrypt.Net.BCrypt;
-
+using RegexApp.Filters;
 
 namespace RegexApp.Controllers {
     public class HomeController : Controller {
@@ -38,6 +38,7 @@ namespace RegexApp.Controllers {
         }
 
         [HttpGet] // GET: /Login
+        [RedirectAuthenticatedUserFilter]
         [Route("Login")]
         public IActionResult Login() {
             return View();
