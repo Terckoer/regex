@@ -27,3 +27,6 @@ body {
     margin-right:9em;
 }
 
+ul {
+    list-style-type: disc;
+}
