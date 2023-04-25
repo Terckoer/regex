@@ -1,0 +1,33 @@
+﻿
+<div>
+    <h1>Expresiones Regulares</h1>
+</div>
+<div>
+    <section>
+        <h2>¿Qué son las expresiones regulares?</h2>
+        <p>Las expresiones regulares son patrones de búsqueda que se utilizan para encontrar y manipular cadenas de texto. En programación, se utilizan con frecuencia para realizar operaciones como la validación de entradas de formularios, la búsqueda y reemplazo de texto en el código fuente y la extracción de información específica de una cadena de texto.</p>
+    </section>
+    <section>
+        <h2>Sintaxis de las expresiones regulares</h2>
+        <p>Las expresiones regulares se escriben utilizando una sintaxis específica que utiliza caracteres especiales y metacaracteres para definir patrones de búsqueda. Por ejemplo, el patrón <code>/\d+/</code> se utiliza para buscar cualquier cadena de texto que contenga uno o más dígitos.</p>
+    </section>
+    <section>
+        <h2>Ejemplos de patrones de búsqueda</h2>
+        <ul>
+            <li><code>/\w+/</code>: Busca cualquier cadena de texto que contenga uno o más caracteres alfanuméricos o guiones bajos.</li>
+            <li><code>/\d{3}-\d{2}-\d{4}/</code>: Busca cualquier cadena de texto que contenga un número de seguro social en el formato "###-##-####".</li>
+            <li><code>/^[A-Z][a-z]+$/</code>: Busca cualquier cadena de texto que contenga una palabra que comience con una letra mayúscula seguida de una o más letras minúsculas.</li>
+        </ul>
+    </section>
+    <section>
+        <h2>Uso de expresiones regulares en JavaScript</h2>
+        <p>En JavaScript, se utilizan las expresiones regulares mediante la clase <code>RegExp</code>. Por ejemplo, se puede utilizar el siguiente código para buscar cualquier cadena de texto que contenga uno o más dígitos:</p>
+        <pre>
+            <code>
+                const myString = "123 Main St.";
+                const myRegex = /\d+/;
+                const result = myRegex.test(myString);
+                console.log(result); // true
+            </code></pre>
+    </section>
+</div>

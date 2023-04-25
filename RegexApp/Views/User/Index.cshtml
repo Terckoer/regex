@@ -1,7 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Welcome ";
-
+ 
 }
+
 <div class="container-fluid d-flex flex-column w-100 h-100 p-0 m-0 min-vh-100 ">
     <div class="row w-100 h-100 p-0 m-0">
         <aside class="d-flex bg-light sidebar w-25 h-100 p-0 m-0 min-vh-100">
@@ -18,9 +19,7 @@
                                 </a>
                                 <ul class="collapse" id="concept">
                                     <li>
-                                        <a href="#">
-                                            Concept of regular expression. Example: /pattern/
-                                        </a>
+                                        <a name="_Regex" onclick="viewClick(this)" href="#">Concept of regular expression. Example: /pattern/</a>
                                     </li>
                                 </ul>
                             </li>
@@ -30,17 +29,15 @@
                                 </a>
                                 <ul class="collapse" id="literals">
                                     <li>
-                                        <a href="#">
-                                            Literal characters. Example: /hello/
-                                        </a>
+                                        <a name="_Dots" onclick="viewClick(this)" href="#"> Literal characters. Example: /hello/</a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a name="_Regex" onclick="viewClick(this)" href="#">
                                             Dots and wildcards. Example: /h.ll/
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a name="_Regex" onclick="viewClick(this)" href="#">
                                             Asterisk and plus sign. Example: /ho*l/
                                         </a>
                                     </li>
@@ -291,34 +288,16 @@
             <div class="bg-dark text-white p-0 m-0">
                 <h1 class="text-center">Dashboard</h1>
             </div>
-            <div class="container my-5">
-                <div class="row">
-                    <div class="col-lg-4 mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">Card 1</h2>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae eros velit. Nulla euismod semper orci, et volutpat nisl efficitur vel.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">Card 2</h2>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae eros velit. Nulla euismod semper orci, et volutpat nisl efficitur vel.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">Card 3</h2>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae eros velit. Nulla euismod semper orci, et volutpat nisl efficitur vel.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <button type="button" class="btn btn-primary shadow-none" onclick="viewClick(this)" name="_Regex" id="id-regex">Show partial</button>
+            <button type="button" class="btn btn-primary" onclick="viewClick(this)" name="_Dots" id="id-dots">Hide partial</button>
+
+            <div id="id-partial-container">
+
             </div>
+            @*@if (ViewData.ContainsKey("partialname") && ViewData["partialname"] != null) {
+                string viewpath = ViewData["partialname"] as string ?? "";
+                @await Html.PartialAsync(viewpath);
+            }*@
         </div>
     </div>
 </div>

@@ -37,12 +37,15 @@ namespace RegexApp.Controllers {
             }
             return View("UserNewPassword", t);//Lo mando a ingresar su nueva contraseña 
         }
-                
-
-        // GET: UserController/Delete/5
-        public ActionResult Delete(int id) {
-            return View();
+               
+        [HttpGet] // GET: User/GetPartialView
+        public IActionResult GetPartialView(string view) {
+            PartialViewResult partialView = PartialView($"Partials/{view}");
+            if (partialView == null)
+                return PartialView("Partials/_EmptyViewResult");
+            return partialView; 
         }
+
 
 
     }
