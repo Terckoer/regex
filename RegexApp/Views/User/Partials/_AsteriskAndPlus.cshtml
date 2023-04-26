@@ -1,0 +1,26 @@
+﻿
+<div class="container">
+	<div class="jumbotron">
+		<h1>Símbolos * y + en expresiones regulares</h1>
+		<p>Los símbolos * y + se utilizan en expresiones regulares para indicar que un elemento puede aparecer cero o más veces (*), o una o más veces (+), respectivamente.</p>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<h2>Símbolo *</h2>
+			<p>El símbolo * se utiliza para indicar que el elemento anterior puede aparecer cero o más veces. Por ejemplo:</p>
+			<ul>
+				<li>/a*/ coincidiría con "", "a", "aa", "aaa", etc.</li>
+				<li>/\d*/ coincidiría con "", "1", "123", etc.</li>
+			</ul>
+		</div>
+		<div class="col-md-6">
+			<h2>Símbolo +</h2>
+			<p>El símbolo + se utiliza para indicar que el elemento anterior puede aparecer una o más veces. Por ejemplo:</p>
+			<ul>
+				<li>/a+/ coincidiría con "a", "aa", "aaa", etc., pero no con "".</li>
+				<li>/\d+/ coincidiría con "1", "123", etc., pero no con "".</li>
+			</ul>
+			<p>En resumen, el símbolo * indica que el elemento anterior es opcional, mientras que el símbolo + indica que el elemento anterior es obligatorio.</p>
+		</div>
+	</div>
+</div>

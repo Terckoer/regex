@@ -29,15 +29,15 @@
                                 </a>
                                 <ul class="collapse" id="literals">
                                     <li>
-                                        <a name="_Dots" onclick="viewClick(this)" href="#"> Literal characters. Example: /hello/</a>
+                                        <a name="_Literals" onclick="viewClick(this)" href="#"> Literal characters. Example: /hello/</a>
                                     </li>
                                     <li>
-                                        <a name="_Regex" onclick="viewClick(this)" href="#">
+                                        <a name="_Dots" onclick="viewClick(this)" href="#">
                                             Dots and wildcards. Example: /h.ll/
                                         </a>
                                     </li>
                                     <li>
-                                        <a name="_Regex" onclick="viewClick(this)" href="#">
+                                        <a name="_AsteriskAndPlus" onclick="viewClick(this)" href="#">
                                             Asterisk and plus sign. Example: /ho*l/
                                         </a>
                                     </li>
@@ -288,16 +288,9 @@
             <div class="bg-dark text-white p-0 m-0">
                 <h1 class="text-center">Dashboard</h1>
             </div>
-            <button type="button" class="btn btn-primary shadow-none" onclick="viewClick(this)" name="_Regex" id="id-regex">Show partial</button>
-            <button type="button" class="btn btn-primary" onclick="viewClick(this)" name="_Dots" id="id-dots">Hide partial</button>
-
             <div id="id-partial-container">
 
             </div>
-            @*@if (ViewData.ContainsKey("partialname") && ViewData["partialname"] != null) {
-                string viewpath = ViewData["partialname"] as string ?? "";
-                @await Html.PartialAsync(viewpath);
-            }*@
         </div>
     </div>
 </div>
