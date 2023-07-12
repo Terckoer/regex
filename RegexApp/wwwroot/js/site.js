@@ -10,3 +10,20 @@ async function viewClick(element) {
     const $container = document.getElementById("id-partial-container");
     $container.innerHTML = data;
 }
+
+function handleRegexChange(testName, ok) {
+    const $txt = document.getElementById('id-regex-txt');
+    const $tests = document.querySelectorAll(`.${testName}`);
+    const $ok = document.querySelectorAll(`.${ok}`);
+
+    for (let i = 0; i < $tests.length; i++) {
+        let tmp = $tests[i].textContent;
+        const regex = new RegExp($txt.textContent);
+        let isMatch = regex.test(tmp);
+        if (isMatch)
+            $ok[i].style.color = "green";
+        else 
+            $ok[i].style.color = "red";
+        
+    }
+}
