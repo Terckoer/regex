@@ -1,20 +1,53 @@
 ﻿<div class="container">
-    <h1>Caracteres literales en expresiones regulares</h1>
-    <p>En las expresiones regulares, los caracteres literales se refieren a los caracteres que representan símbolos o caracteres específicos. Por ejemplo, la letra "a" es un carácter literal que representa el símbolo de la letra "a" en una expresión regular.</p>
-    <p>Los caracteres literales se utilizan para especificar patrones precisos que se deben encontrar en una cadena de texto.</p>
-    <h2>Ejemplos de caracteres literales</h2>
-    <p>Algunos ejemplos de caracteres literales en expresiones regulares son:</p>
+    <h1>Literal Characters in Regular Expressions</h1>
+    <p>In regular expressions, literal characters refer to the characters that represent specific symbols or characters. For example, the letter "a" is a literal character that represents the symbol of the letter "a" in a regular expression.</p>
+    <p>Literal characters are used to specify precise patterns that should be found in a text string.</p>
+    <h2>Examples of Literal Characters</h2>
+    <p>Some examples of literal characters in regular expressions are:</p>
     <ul>
-        <li>La letra "a" representa el símbolo de la letra "a".</li>
-        <li>El número "5" representa el símbolo del número "5".</li>
-        <li>El signo de puntuación "." representa el símbolo del punto literal.</li>
-        <li>El símbolo del dólar "$" representa el símbolo del dólar literal.</li>
+        <li>The letter "a" represents the symbol of the letter "a".</li>
+        <li>The number "5" represents the symbol of the number "5".</li>
+        <li>The punctuation mark "." represents the literal dot symbol.</li>
+        <li>The dollar symbol "$" represents the literal dollar symbol.</li>
     </ul>
-    <h2>Uso de caracteres especiales</h2>
-    <p>Es importante tener en cuenta que algunos caracteres tienen un significado especial en las expresiones regulares y, por lo tanto, deben ser escapados para ser utilizados como caracteres literales. Por ejemplo:</p>
+    <h2>Using Special Characters</h2>
+    <p>It is important to note that some characters have a special meaning in regular expressions and, therefore, need to be escaped to be used as literal characters. For example:</p>
     <ul>
-        <li>El signo de interrogación "?" representa el símbolo de cero o un caracter. Para utilizar el signo de interrogación como un carácter literal, se debe escapar con una barra invertida: "\?".</li>
-        <li>El asterisco "*" representa el símbolo de cero o más caracteres. Para utilizar el asterisco como un carácter literal, se debe escapar con una barra invertida: "\*".</li>
-        <li>El signo de más "+" representa el símbolo de uno o más caracteres. Para utilizar el signo de más como un carácter literal, se debe escapar con una barra invertida: "\+".</li>
+        <li>The question mark "?" represents the symbol of zero or one character. To use the question mark as a literal character, it must be escaped with a backslash: "\?".</li>
+        <li>The asterisk "*" represents the symbol of zero or more characters. To use the asterisk as a literal character, it must be escaped with a backslash: "\*".</li>
+        <li>The plus sign "+" represents the symbol of one or more characters. To use the plus sign as a literal character, it must be escaped with a backslash: "\+".</li>
     </ul>
+    <h2>First steps, trying to match the regex for all cases</h2>
+    <div class="d-flex flex-column w-100 p-2 m-0 justify-content-center align-items-end">
+        <div class="d-flex flex-column w-100 h-75 mb-2">
+            <div class="d-flex flex-row p-1 align-items-center">
+                <p class="fs-5 p-1 text-nowrap m-1 w-10"><span id="test-regex-1">j</span><span id="regex-ok-1"> OK</span></p>
+                <input type="text" oninput="handleOneRegexChange('id-regex-txt-1', 'test-regex-1', 'regex-ok-1')" placeholder="Your regex here." class="w-25 ms-2 me-1 border border-3 p-1" id="id-regex-txt-1" />
+            </div>
+            <div class="d-flex flex-row p-1 align-items-center">
+                <p class="fs-5 p-1 text-nowrap m-1 w-10"><span id="test-regex-2">J</span><span id="regex-ok-2"> OK</span></p>
+                <input type="text" oninput="handleOneRegexChange('id-regex-txt-2', 'test-regex-2', 'regex-ok-2')" placeholder="Your regex here." class="w-25 ms-2 me-1 border border-3 p-1" id="id-regex-txt-2" />
+            </div>
+            <div class="d-flex flex-row p-1 align-items-center">
+                <p class="fs-5 p-1 text-nowrap m-1 w-10"><span id="test-regex-3">9</span><span id="regex-ok-3"> OK</span></p>
+                <input type="text" oninput="handleOneRegexChange('id-regex-txt-3', 'test-regex-3', 'regex-ok-3')" placeholder="Your regex here." class="w-25 ms-2 me-1 border border-3 p-1" id="id-regex-txt-3" />
+            </div>
+            <div class="d-flex flex-row p-1 align-items-center">
+                <p class="fs-5 p-1 text-nowrap m-1 w-10"><span id="test-regex-4">+</span><span id="regex-ok-4"> OK</span></p>
+                <input type="text" oninput="handleOneRegexChange('id-regex-txt-4', 'test-regex-4', 'regex-ok-4')" placeholder="Your regex here." class="w-25 ms-2 me-1 border border-3 p-1" id="id-regex-txt-4" />
+            </div>
+            <div class="d-flex flex-row p-1 align-items-center">
+                <p class="fs-5 p-1 text-nowrap m-1 w-10"><span id="test-regex-5">.</span><span id="regex-ok-5"> OK</span></p>
+                <input type="text" oninput="handleOneRegexChange('id-regex-txt-5', 'test-regex-5', 'regex-ok-5')" placeholder="Your regex here." class="w-25 ms-2 me-1 border border-3 p-1" id="id-regex-txt-5" />
+            </div>
+            <div class="d-flex flex-row p-1 align-items-center">
+                <p class="fs-5 p-1 text-nowrap m-1 w-10"><span id="test-regex-6">\</span><span id="regex-ok-6"> OK</span></p>
+                <input type="text" oninput="handleOneRegexChange('id-regex-txt-6', 'test-regex-6', 'regex-ok-6')" placeholder="Your regex here." class="w-25 ms-2 me-1 border border-3 p-1" id="id-regex-txt-6" />
+            </div>
+            <div class="d-flex flex-row p-1 align-items-center">
+                <p class="fs-5 p-1 text-nowrap m-1 w-10"></p>
+                <button class="btn btn-primary w-25 ms-2 me-1">Complete</button>
+            </div>
+        </div>
+    </div>
 </div>

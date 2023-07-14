@@ -1,29 +1,29 @@
 ﻿<div class="container">
     <div class="text-center">
-        <h1 class="my-4">Expresiones Regulares</h1>
+        <h1 class="my-4">Regular Expressions</h1>
     </div>
     <div>
         <section>
-            <h2>¿Qué son las expresiones regulares?</h2>
-            <p>Las expresiones regulares son patrones de búsqueda que se utilizan para encontrar y manipular cadenas de texto. En programación, se utilizan con frecuencia para realizar operaciones como la validación de entradas de formularios, la búsqueda y reemplazo de texto en el código fuente y la extracción de información específica de una cadena de texto.</p>
+            <h2>What are Regular Expressions?</h2>
+            <p>Regular expressions are search patterns used to find and manipulate text strings. In programming, they are often used for tasks such as form input validation, searching and replacing text within source code, and extracting specific information from a text string.</p>
         </section>
         <section>
-            <h2>Sintaxis de las expresiones regulares</h2>
-            <p>Las expresiones regulares se escriben utilizando una sintaxis específica que utiliza caracteres especiales y metacaracteres para definir patrones de búsqueda. Por ejemplo, el patrón <code>/\d+/</code> se utiliza para buscar cualquier cadena de texto que contenga uno o más dígitos.</p>
+            <h2>Syntax of Regular Expressions</h2>
+            <p>Regular expressions are written using a specific syntax that includes special characters and metacharacters to define search patterns. For example, the pattern <code>/\d+/</code> is used to find any text string containing one or more digits.</p>
         </section>
         <section>
-            <h2>Ejemplos de patrones de búsqueda</h2>
+            <h2>Examples of Search Patterns</h2>
             <ul>
-                <li><code>/\w+/</code>: Busca cualquier cadena de texto que contenga uno o más caracteres alfanuméricos o guiones bajos.</li>
-                <li><code>/\d{3}-\d{2}-\d{4}/</code>: Busca cualquier cadena de texto que contenga un número de seguro social en el formato "###-##-####".</li>
-                <li><code>/^[A-Z][a-z]+$/</code>: Busca cualquier cadena de texto que contenga una palabra que comience con una letra mayúscula seguida de una o más letras minúsculas.</li>
+                <li><code>/\w+/</code>: Searches for any text string containing one or more alphanumeric characters or underscores.</li>
+                <li><code>/\d{3}-\d{2}-\d{4}/</code>: Searches for any text string containing a Social Security Number in the format "###-##-####".</li>
+                <li><code>/^[A-Z][a-z]+$/</code>: Searches for any text string containing a word that starts with an uppercase letter followed by one or more lowercase letters.</li>
             </ul>
         </section>
         <section>
-            <h2>Uso de expresiones regulares en JavaScript</h2>
-            <p>En JavaScript, se utilizan las expresiones regulares mediante la clase <code>RegExp</code>. Por ejemplo, se puede utilizar el siguiente código para buscar cualquier cadena de texto que contenga uno o más dígitos:</p>
+            <h2>Using Regular Expressions in JavaScript</h2>
+            <p>In JavaScript, regular expressions are used with the <code>RegExp</code> class. For example, the following code can be used to search for any text string containing one or more digits:</p>
             <pre>
-            <code>
+                <code>
                     const myString = "123 Main St.";
                     const myRegex = /\d+/;
                     const result = myRegex.test(myString);
@@ -32,4 +32,6 @@
             </pre>
         </section>
     </div>
+    
 </div>
+

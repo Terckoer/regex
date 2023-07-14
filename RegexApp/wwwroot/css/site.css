@@ -27,6 +27,14 @@ body {
     margin-right:9em;
 }
 
+.w-10{
+    width:10% !important;
+}
+
+.w-35 {
+    width: 35% !important;
+}
+
 ul {
     list-style-type: disc;
 }
