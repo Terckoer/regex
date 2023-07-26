@@ -3,10 +3,14 @@
 // Write your JavaScript code.
 
 async function viewClick(element) {
-    const response = await fetch(`User/GetPartialView?view=${encodeURIComponent(element.name)}`, { method: "GET" });
-    const data = await response.text();
-    const $container = document.getElementById("id-partial-container");
-    $container.innerHTML = data;
+    try {
+        const response = await fetch(`User/GetPartialView?view=${encodeURIComponent(element.name)}`, { method: "GET" });
+        const data = await response.text();
+        const $container = document.getElementById("id-partial-container");
+        $container.innerHTML = data;
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 function handleRegexChange() {
@@ -78,6 +82,23 @@ function isRegexValid(expresion) {
     } catch (error) {
       return false;
     }
+}
+
+function checkTestToSubmit(testName) {
+    const $tests = document.querySelectorAll(`.${testName} p`);
+    for (let i = 0; i < $tests.length; i++) {
+        const $test = $tests[i].querySelector(`span:nth-of-type(1)`);
+        const $result = $tests[i].querySelector(`span:nth-of-type(2)`);
+        let testResult = $result.textContent.substring(4);
+        if ($test.textContent !== testResult) {
+            return;
+        }
+    }
+
+    console.log('works!!');
+
+
+
 }
 
 // document.getElementById('id-regex-txt').addEventListener('input', handleRegexChange);

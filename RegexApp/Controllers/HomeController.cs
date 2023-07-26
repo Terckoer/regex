@@ -61,6 +61,7 @@ namespace RegexApp.Controllers {
                 ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 AuthenticationProperties authProperties = new AuthenticationProperties {
                     IsPersistent = true,
+                    ExpiresUtc = DateTime.UtcNow.AddDays(7),
                 };
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
                 HttpContext.Session.SetString("username", user.Username);
@@ -68,7 +69,9 @@ namespace RegexApp.Controllers {
                 if (Request.Cookies["username"] == null) {
                     var cookieOptions = new CookieOptions {
                         Expires = DateTime.UtcNow.AddDays(7),
-                        IsEssential = true 
+                        IsEssential = true ,
+                        Secure = true,
+                        SameSite = SameSiteMode.Lax
                     };
                     Response.Cookies.Append("username", user.Username, cookieOptions);
                 }

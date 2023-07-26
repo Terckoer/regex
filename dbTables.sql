@@ -41,10 +41,9 @@ CREATE TABLE tblTempTokens(
 	Enabled_ bit NOT NULL DEFAULT 1
 )
 
--- LAST UPDATE 25/04/2023 07:24PM
+-- LAST UPDATE 25/07/2023 07:24PM
 CREATE TABLE tblChallenges(
 	PK_Challenge int PRIMARY KEY IDENTITY(1,1) NOT NULL,
-	FK_Challenges_Users int NOT NULL FOREIGN KEY REFERENCES tblUsers(PK_Users), 
 	Name_ varchar(256) NOT NULL,
 	Description_ varchar(MAX),
 	Creation_Date Datetime DEFAULT(GETDATE()) NOT NULL,
@@ -59,6 +58,14 @@ CREATE TABLE tblChallengesProgress(
 	FK_Users int FOREIGN KEY REFERENCES tblUsers(PK_Users) NOT NULL, 
 	Completed bit
 )
+
+CREATE TABLE tblChallengeTests(
+	PK_ChallengeTest INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	FK_Challenges INT FOREIGN KEY REFERENCES tblChallenges(PK_Challenge) NOT NULL,
+	Test varchar(256) NOT NULL,
+	Enabled_ bit NOT NULL
+)
+
 
 -- LOS RETOS LOS CREAN LOS USUARIOS
 -- LOS RETOS QUE CREAN LOS USUARIOS LOS APRUEBA ALGUIEN CON ROL ESPECIAL

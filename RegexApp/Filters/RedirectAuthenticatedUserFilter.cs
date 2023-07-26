@@ -7,8 +7,8 @@ namespace RegexApp.Filters
     {
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            
-            if(context.HttpContext.User.Identity != null && context.HttpContext.User.Identity.IsAuthenticated)
+            string? cookie = context.HttpContext.Request.Cookies["username"];
+            if(cookie != null && cookie != "" && context.HttpContext.User.Identity != null && context.HttpContext.User.Identity.IsAuthenticated)
             {
                 context.Result = new RedirectToActionResult("Index", "User", null);
             }

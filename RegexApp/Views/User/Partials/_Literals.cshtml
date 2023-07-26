@@ -20,33 +20,33 @@
     <h2>First steps, trying to match the regex for all cases</h2>
     <div class="d-flex flex-column w-100 p-2 m-0 justify-content-center align-items-end">
         <div class="d-flex flex-column w-100 h-75 mb-2">
-            <div class="d-flex flex-row p-1 align-items-center">
+            <div class="d-flex flex-row p-1 align-items-center literals-test">
                 <p class="fs-5 p-1 text-nowrap m-1 w-10"><span id="test-regex-1">j</span><span id="regex-ok-1"> OK</span></p>
                 <input type="text" oninput="handleOneRegexChange('id-regex-txt-1', 'test-regex-1', 'regex-ok-1')" placeholder="Your regex here." class="w-25 ms-2 me-1 border border-3 p-1" id="id-regex-txt-1" />
             </div>
-            <div class="d-flex flex-row p-1 align-items-center">
-                <p class="fs-5 p-1 text-nowrap m-1 w-10"><span id="test-regex-2">J</span><span id="regex-ok-2"> OK</span></p>
+            <div class="d-flex flex-row p-1 align-items-center literals-test">
+                <p class="fs-5 p-1 text-nowrap m-1 w-10"><span id="test-regex-2">Joke</span><span id="regex-ok-2"> OK</span></p>
                 <input type="text" oninput="handleOneRegexChange('id-regex-txt-2', 'test-regex-2', 'regex-ok-2')" placeholder="Your regex here." class="w-25 ms-2 me-1 border border-3 p-1" id="id-regex-txt-2" />
             </div>
-            <div class="d-flex flex-row p-1 align-items-center">
+            <div class="d-flex flex-row p-1 align-items-center literals-test">
                 <p class="fs-5 p-1 text-nowrap m-1 w-10"><span id="test-regex-3">9</span><span id="regex-ok-3"> OK</span></p>
                 <input type="text" oninput="handleOneRegexChange('id-regex-txt-3', 'test-regex-3', 'regex-ok-3')" placeholder="Your regex here." class="w-25 ms-2 me-1 border border-3 p-1" id="id-regex-txt-3" />
             </div>
-            <div class="d-flex flex-row p-1 align-items-center">
-                <p class="fs-5 p-1 text-nowrap m-1 w-10"><span id="test-regex-4">+</span><span id="regex-ok-4"> OK</span></p>
+            <div class="d-flex flex-row p-1 align-items-center literals-test">
+                <p class="fs-5 p-1 text-nowrap m-1 w-10"><span id="test-regex-4">875</span><span id="regex-ok-4"> OK</span></p>
                 <input type="text" oninput="handleOneRegexChange('id-regex-txt-4', 'test-regex-4', 'regex-ok-4')" placeholder="Your regex here." class="w-25 ms-2 me-1 border border-3 p-1" id="id-regex-txt-4" />
             </div>
-            <div class="d-flex flex-row p-1 align-items-center">
+            <div class="d-flex flex-row p-1 align-items-center literals-test">
                 <p class="fs-5 p-1 text-nowrap m-1 w-10"><span id="test-regex-5">.</span><span id="regex-ok-5"> OK</span></p>
                 <input type="text" oninput="handleOneRegexChange('id-regex-txt-5', 'test-regex-5', 'regex-ok-5')" placeholder="Your regex here." class="w-25 ms-2 me-1 border border-3 p-1" id="id-regex-txt-5" />
             </div>
-            <div class="d-flex flex-row p-1 align-items-center">
+            <div class="d-flex flex-row p-1 align-items-center literals-test">
                 <p class="fs-5 p-1 text-nowrap m-1 w-10"><span id="test-regex-6">\</span><span id="regex-ok-6"> OK</span></p>
                 <input type="text" oninput="handleOneRegexChange('id-regex-txt-6', 'test-regex-6', 'regex-ok-6')" placeholder="Your regex here." class="w-25 ms-2 me-1 border border-3 p-1" id="id-regex-txt-6" />
             </div>
-            <div class="d-flex flex-row p-1 align-items-center">
+            <div class="d-flex flex-row p-1 align-items-center literals-test">
                 <p class="fs-5 p-1 text-nowrap m-1 w-10"></p>
-                <button class="btn btn-primary w-25 ms-2 me-1">Complete</button>
+                <button class="btn btn-primary w-25 ms-2 me-1" onclick="checkTestToSubmit('literals-test')">Complete</button>
             </div>
         </div>
     </div>

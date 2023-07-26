@@ -17,6 +17,7 @@ namespace RegexApp.Controllers {
 
         // GET: /User
         public ActionResult Index() {
+            
             if (User != null && User.Identity != null && User.Identity.IsAuthenticated) {
                 return View();
             }// El usuario no está autenticado
