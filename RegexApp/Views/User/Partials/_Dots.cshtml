@@ -1,36 +1,34 @@
 ﻿
 <div class="container ">
-		<h1>Símbolo . y comodines en expresiones regulares</h1>
-		<p>El símbolo `.` se utiliza en expresiones regulares para representar cualquier carácter, excepto los saltos de línea. Los comodines son caracteres especiales que se utilizan para simplificar la búsqueda de patrones en un texto.</p>
+	<h1>Symbol . and Wildcards in Regular Expressions</h1>
+	<p>The symbol `.` is used in regular expressions to represent any character except newline characters. Wildcards are special characters used to simplify the search for patterns in a text.</p>
 	<div class="row">
 		<div class="col-md-6">
-			<h2>Símbolo `.`</h2>
-			<p>El símbolo `.` se utiliza para representar cualquier carácter, excepto los saltos de línea. Por ejemplo:</p>
+			<h2>Symbol `.`</h2>
+			<p>The symbol `.` is used to represent any character except newline characters. For example:</p>
 			<ul>
-				<li>/a.b/ coincidiría con "acb", "aeb", "afb", etc., pero no con "ab".</li>
-				<li>/c.t/ coincidiría con "cat", "cot", "cut", etc., pero no con "ct".</li>
+				<li>/a.b/ would match "acb", "aeb", "afb", etc., but not "ab".</li>
+				<li>/c.t/ would match "cat", "cot", "cut", etc., but not "ct".</li>
 			</ul>
 		</div>
 		<div class="col-md-6">
-			<h2>Comodines</h2>
-			<p>Los comodines son caracteres especiales que se utilizan para simplificar la búsqueda de patrones en un texto. Algunos ejemplos de comodines son:</p>
+			<h2>Wildcards</h2>
+			<p>Wildcards are special characters used to simplify the search for patterns in a text. Some examples of wildcards are:</p>
 			<ul>
-				<li>El asterisco (*), que representa cero o más ocurrencias del carácter anterior. Por ejemplo, /a*b/ coincidiría con "b", "ab", "aab", "aaab", etc.</li>
-				<li>El signo de interrogación (?), que representa cero o una ocurrencia del carácter anterior. Por ejemplo, /colou?r/ coincidiría con "color" o "colour".</li>
-				<li>Las llaves ({ }), que se utilizan para especificar un número específico de ocurrencias del carácter anterior. Por ejemplo, /a{2,4}b/ coincidiría con "aab", "aaab" o "aaaab", pero no con "ab" o "aabb".</li>
+				<li>The asterisk (*), which represents zero or more occurrences of the preceding character. For example, /a*b/ would match "b", "ab", "aab", "aaab", etc.</li>
+				<li>The question mark (?), which represents zero or one occurrence of the preceding character. For example, /colou?r/ would match "color" or "colour".</li>
+				<li>Curly braces ({ }), which are used to specify a specific number of occurrences of the preceding character. For example, /a{2,4}b/ would match "aab", "aaab", or "aaaab", but not "ab" or "aabb".</li>
 			</ul>
 		</div>
 	</div>
 	<div class="d-flex flex-column w-100 p-2 m-0 justify-content-center align-items-end">
 		<div class="d-flex flex-column w-100 h-75 mb-2">
 			<ol>
-				<li class="fs-5"><span class="test-regex">j</span><span class="regex-ok"> OK</span></li>
-				<li class="fs-5"><span class="test-regex">J</span><span class="regex-ok"> OK</span></li>
-				<li class="fs-5"><span class="test-regex">9</span><span class="regex-ok"> OK</span></li>
-				<li class="fs-5"><span class="test-regex">+</span><span class="regex-ok"> OK</span></li>
-				<li class="fs-5"><span class="test-regex">.</span><span class="regex-ok"> OK</span></li>
-				<li class="fs-5"><span class="test-regex">\</span><span class="regex-ok"> OK</span></li>
-				<li class="fs-5"><span class="test-regex">^</span><span class="regex-ok"> OK</span></li>
+				<li class="fs-5"><span class="test-regex">1chickenhere</span><span class="regex-ok"></span></li>
+				<li class="fs-5"><span class="test-regex">1sbrokensome</span><span class="regex-ok"></span></li>
+				<li class="fs-5"><span class="test-regex">1oryukendone</span><span class="regex-ok"></span></li>
+				<li class="fs-5"><span class="test-regex">1sssukendsse</span><span class="regex-ok"></span></li>
+				<li class="fs-5"><span class="test-regex">1&^%$ken(*&e</span><span class="regex-ok"></span></li>
 			</ol>
 		</div>
 		<div class="w-100 h-25">

@@ -26,21 +26,22 @@ function handleRegexChange() {
         let isMatch = regex.test(tmp);
         let matches = tmp.match(regex);
         let result = matches === null ? "" : matches.join();
+
         if($txt.value===""){
             $ok[i].style.color = "black";
-            $ok[i].textContent = " OK ";
+            $ok[i].textContent = "";
         }        
         else if (isMatch && result === tmp) {
             $ok[i].style.color = "green";
-            $ok[i].textContent = " OK " + result;
+            $ok[i].textContent = " "+ "\u2713";
         }
         else if (isMatch && result !== "") {
             $ok[i].style.color = "blue";
-            $ok[i].textContent = " OK " + result;
+            $ok[i].textContent = " " + result;
         }
         else {
             $ok[i].style.color = "red";
-            $ok[i].textContent = " OK ";
+            $ok[i].textContent = " " + "\u274C";
         } 
     }
 }
@@ -59,19 +60,19 @@ function handleOneRegexChange(idRegex, idTest, idOk) {
     let result = matches === null ? "" : matches.join();
     if ($txt.value === "") {
         $ok.style.color = "black";
-        $ok.textContent = " OK ";
+        $ok.textContent = " ";
     }
     else if (isMatch && result === tmp) {
         $ok.style.color = "green";
-        $ok.textContent = " OK " + result;
+        $ok.textContent = " " + "\u2713";
     }
     else if (isMatch && result !== "") {
         $ok.style.color = "blue";
-        $ok.textContent = " OK " + result;
+        $ok.textContent = " " + result;
     }
     else {
         $ok.style.color = "red";
-        $ok.textContent = " OK ";
+        $ok.textContent = " " + "\u274C";
     }
 }
 
