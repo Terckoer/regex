@@ -1,57 +1,57 @@
 ﻿
 <div class="container">
-	<div class="jumbotron">
-		<h1>Símbolos * y + en expresiones regulares</h1>
-		<p>Los símbolos * y + se utilizan en expresiones regulares para indicar que un elemento puede aparecer cero o más veces (*), o una o más veces (+), respectivamente.</p>
-	</div>
-	<div class="row">
-		<div class="col-md-6">
-			<h2>Símbolo *</h2>
-			<p>El símbolo * se utiliza para indicar que el elemento anterior puede aparecer cero o más veces. Por ejemplo:</p>
-			<ul>
-				<li>/a*/ coincidiría con "", "a", "aa", "aaa", etc.</li>
-				<li>/\d*/ coincidiría con "", "1", "123", etc.</li>
-			</ul>
-		</div>
-		<div class="col-md-6">
-			<h2>Símbolo +</h2>
-			<p>El símbolo + se utiliza para indicar que el elemento anterior puede aparecer una o más veces. Por ejemplo:</p>
-			<ul>
-				<li>/a+/ coincidiría con "a", "aa", "aaa", etc., pero no con "".</li>
-				<li>/\d+/ coincidiría con "1", "123", etc., pero no con "".</li>
-			</ul>
-			<p>En resumen, el símbolo * indica que el elemento anterior es opcional, mientras que el símbolo + indica que el elemento anterior es obligatorio.</p>
-		</div>
-	</div>
+    <div class="jumbotron">
+        <h1>Symbols * and + in Regular Expressions</h1>
+        <p>The symbols * and + are used in regular expressions to indicate that an element can appear zero or more times (*), or one or more times (+), respectively.</p>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Symbol *</h2>
+            <p>The symbol * is used to indicate that the preceding element can appear zero or more times. For example:</p>
+            <ul>
+                <li>/a*/ would match "", "a", "aa", "aaa", etc.</li>
+                <li>/\d*/ would match "", "1", "123", etc.</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h2>Symbol +</h2>
+            <p>The symbol + is used to indicate that the preceding element can appear one or more times. For example:</p>
+            <ul>
+                <li>/a+/ would match "a", "aa", "aaa", etc., but not "".</li>
+                <li>/\d+/ would match "1", "123", etc., but not "".</li>
+            </ul>
+            <p>In summary, the symbol * indicates that the preceding element is optional, while the symbol + indicates that the preceding element is mandatory.</p>
+        </div>
+    </div>
     <div class="d-flex flex-column w-100 p-2 m-0 justify-content-center align-items-end">
         <div class="d-flex flex-column w-100 h-75 mb-2 ">
             <div class="d-flex flex-row p-1 align-items-center literals-test">
-                <p class="fs-5 p-1 text-nowrap m-1 w-10"><span id="test-regex-1">j</span></p>
+                <p class="fs-5 p-1 text-nowrap m-1 w-10"><span id="test-regex-1">eeee</span></p>
                 <input type="text" oninput="handleOneRegexChange('id-regex-txt-1', 'test-regex-1', 'regex-ok-1')" placeholder="Your regex here." class="w-25 ms-2 me-1 border border-3 p-1" id="id-regex-txt-1" />
                 <span id="regex-ok-1" class="fs-4"></span>
             </div>
             <div class="d-flex flex-row p-1 align-items-center literals-test">
-                <p class="fs-5 p-1 text-nowrap m-1 w-10"><span id="test-regex-2">Joke</span></p>
+                <p class="fs-5 p-1 text-nowrap m-1 w-10"><span id="test-regex-2">123</span></p>
                 <input type="text" oninput="handleOneRegexChange('id-regex-txt-2', 'test-regex-2', 'regex-ok-2')" placeholder="Your regex here." class="w-25 ms-2 me-1 border border-3 p-1" id="id-regex-txt-2" />
                 <span id="regex-ok-2" class="fs-4"></span>
             </div>
             <div class="d-flex flex-row p-1 align-items-center literals-test">
-                <p class="fs-5 p-1 text-nowrap m-1 w-10"><span id="test-regex-3">9</span></p>
+                <p class="fs-5 p-1 text-nowrap m-1 w-10"><span id="test-regex-3">yyyy</span></p>
                 <input type="text" oninput="handleOneRegexChange('id-regex-txt-3', 'test-regex-3', 'regex-ok-3')" placeholder="Your regex here." class="w-25 ms-2 me-1 border border-3 p-1" id="id-regex-txt-3" />
                 <span id="regex-ok-3" class="fs-4"></span>
             </div>
             <div class="d-flex flex-row p-1 align-items-center literals-test">
-                <p class="fs-5 p-1 text-nowrap m-1 w-10"><span id="test-regex-4">875</span></p>
+                <p class="fs-5 p-1 text-nowrap m-1 w-10"><span id="test-regex-4">wooooow</span></p>
                 <input type="text" oninput="handleOneRegexChange('id-regex-txt-4', 'test-regex-4', 'regex-ok-4')" placeholder="Your regex here." class="w-25 ms-2 me-1 border border-3 p-1" id="id-regex-txt-4" />
                 <span id="regex-ok-4" class="fs-4"></span>
             </div>
             <div class="d-flex flex-row p-1 align-items-center literals-test">
-                <p class="fs-5 p-1 text-nowrap m-1 w-10"><span id="test-regex-5">.</span></p>
+                <p class="fs-5 p-1 text-nowrap m-1 w-10"><span id="test-regex-5">123eeee</span></p>
                 <input type="text" oninput="handleOneRegexChange('id-regex-txt-5', 'test-regex-5', 'regex-ok-5')" placeholder="Your regex here." class="w-25 ms-2 me-1 border border-3 p-1" id="id-regex-txt-5" />
                 <span id="regex-ok-5" class="fs-4"></span>
             </div>
             <div class="d-flex flex-row p-1 align-items-center literals-test">
-                <p class="fs-5 p-1 text-nowrap m-1 w-10"><span id="test-regex-6">\</span></p>
+                <p class="fs-5 p-1 text-nowrap m-1 w-10"><span id="test-regex-6">zzzz</span></p>
                 <input type="text" oninput="handleOneRegexChange('id-regex-txt-6', 'test-regex-6', 'regex-ok-6')" placeholder="Your regex here." class="w-25 ms-2 me-1 border border-3 p-1" id="id-regex-txt-6" />
                 <span id="regex-ok-6" class="fs-4"></span>
             </div>

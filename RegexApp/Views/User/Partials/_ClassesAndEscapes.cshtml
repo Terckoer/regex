@@ -3,20 +3,48 @@
 	<div class="jumbotron">	
 	</div>
 	<div class="row">
-		<div class="col-md-6">
-			<h2></h2>
-			<p></p>
-			<ul>
-				<li></li>
-				<li></li>
-			</ul>
-		</div>
-		<div class="col-md-6">
-			<h2></h2>
-			<p></p>
-			<ul>
-				<li></li>
-			</ul>
-		</div>
-	</div>
+        <div class="jumbotron">
+            <h1>Character Classes in Regular Expressions</h1>
+            <p>Character classes in regular expressions allow you to match any one of a set of characters. They are defined using square brackets ([]).</p>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Common Character Classes</h2>
+                <p>Here are some commonly used character classes in regular expressions:</p>
+                <ul>
+                    <li><code>/\d/</code> matches any digit character.</li>
+                    <li><code>/\w/</code> matches any word character (alphanumeric + underscore).</li>
+                    <li><code>/\s/</code> matches any whitespace character (space, tab, newline, etc.).</li>
+                    <li><code>/[0-9a-fA-F]/</code> matches a hexadecimal digit.</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h2>Usage</h2>
+                <p>Character classes are useful when you want to match any character from a specific set. They can be combined with other regex elements for more complex patterns.</p>
+                <p>For example, /[0-9]/ matches any digit character, and /[a-zA-Z]/ matches any uppercase or lowercase letter.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Example: /[aeiou]/</h2>
+                <p>This regular expression will match any single lowercase vowel character.</p>
+                <ul>
+                    <li>/[aeiou]/ matches "a", "e", "i", "o", "u".</li>
+                    <li>/[aeiou]/ does not match "b", "c", "d", etc.</li>
+                </ul>
+                <h2>Example: /[1234]/</h2>
+                <p>This regular expression will match any number in the bracket.</p>
+                <ul>
+                    <li>/[1234]/ matches "1", "2", "3", "4".</li>
+                    <li>/[1234]/ does not match "5", "6", "7", etc.</li>
+                </ul>
+                <h2>Example: /[CcDdTt]o[NnMmDd]e/</h2>
+                <p>This regular expression will match lowercase and uppercase characters and find a word.</p>
+                <ul>
+                    <li>/[CcDdTt]o[NnMmDd]e/ matches "Code", "Come", "Tone", "doNe".</li>
+                    <li>/[CcDdTt]o[NnMmDd]e/ does not match "Rope", "MoLe", "Zone", etc.</li>
+                </ul>
+            </div>
+	    </div>
+    </div>
 </div>
