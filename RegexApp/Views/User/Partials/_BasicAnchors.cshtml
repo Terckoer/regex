@@ -12,34 +12,30 @@
             <ul>
                 <li><code>^</code> matches the start of a line or string.</li>
                 <li><code>$</code> matches the end of a line or string.</li>
-                <li><code>\b</code> matches a word boundary.</li>
             </ul>
         </div>
         <div class="col-md-6">
             <h2>Usage</h2>
-            <p>Anchors are useful when you want to match patterns only at specific positions within the input text. They help you ensure that a pattern occurs at the beginning, end, or boundaries of words.</p>
-            <p>For example, <code>^h</code> matches a line or string that starts with "h", and <code>\btest\b</code> matches the word "test" as a whole word.</p>
+            <p>Anchors are useful when you want to match patterns only at specific positions within the input text. They help you ensure that a pattern occurs at the beginning or end of words.</p>
+            <p>For example, <code>^h</code> matches a line or string that starts with "h", and <code>t$</code> matches a line or string that ends with "t".</p>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <h2>Example: Matching the Start of a Line</h2>
-            <p>This regular expression will match lines that start with "h":</p>
             <ul>
                 <li><code>^h</code> matches "hello", "hi", etc.</li>
-                <li><code>^h</code> does not match "ahoy", "hey", etc.</li>
+                <li><code>^h</code> does not match "ahoy", "nihao", etc.</li>
+                <li><code>^hak</code> matches "hakkai", "haki", etc.</li>
+                <li><code>^hak</code> does not match "chakal", "hokkaido", etc.</li>
             </ul>
             <h2>Example: Matching the End of a Line</h2>
-            <p>This regular expression will match lines that end with "!" at the end:</p>
             <ul>
                 <li><code>!$</code> matches "Wow!", "Awesome!", etc.</li>
-                <li><code>!$</code> does not match "Hello", "Hi!", etc.</li>
-            </ul>
-            <h2>Example: Matching Whole Words</h2>
-            <p>This regular expression will match the word "regex" as a whole word:</p>
-            <ul>
-                <li><code>\bregex\b</code> matches "regex" but not "regex101", "regular", etc.</li>
-            </ul>
+                <li><code>!$</code> does not match "Hello", "Hi", etc.</li>
+                <li><code>ing$</code> matches "Good Morning", "Running", etc.</li>
+                <li><code>ing$</code> does not match "Hong Kong", "Good Afternoon", etc.</li>
+            </ul>            
         </div>
     </div>
 </div>

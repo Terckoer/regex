@@ -1,42 +1,50 @@
 ﻿<div class="container">
     <div class="jumbotron">
-        <h1>Topic: Expression Boundaries in Regular Expressions</h1>
-        <p>In this topic, we'll explore the concept of Expression Boundaries in regular expressions and how they are used to anchor patterns to specific positions within the text.</p>
-    </div>
+        <h1>Expression Boundaries</h1>
+        <p>Boundaries in regular expressions are markers that indicate specific positions in a text string where matches should be made. 
+            Unlike anchors (<code>^</code> and <code>$</code>) that focus on the beginning and end of a line or string, 
+            boundaries are used to identify locations where certain patterns should occur in relation to word boundaries, spaces, or non-matches..
+        </p>
+        <p>Expression Boundaries are markers that allow us to anchor patterns to specific positions in the text. We'll learn about their importance and how to use them.</p>
+
+    </div>    
     <div class="row">
         <div class="col-md-12">
-            <h2>1. Introduction to Expression Boundaries</h2>
-            <p>Expression Boundaries are markers that allow us to anchor patterns to specific positions in the text. We'll learn about their importance and how to use them.</p>
+            <h2>
+                Full word boundary: \b
+            </h2>
+            <p>
+                The <code>\b</code> marker matches the position between a word character <code>\w</code> and a non-word character <code>\W</code>. 
+                In other words, it matches the boundary between alphanumeric and non-alphanumeric characters. 
+                This is commonly used to find whole words within a string.
+                For example, the regular expression <code>\bapple\b</code> will match only the word "apple" as a complete word, 
+                it will not match if "apple" is inside another word like "pineapples".
+            </p>
+            <h2>Example: Matching Whole Words</h2>
+            <ul>
+                <li><code>\bregex\b</code> matches "regex" but not "regexp", "regexion", etc.</li>
+                <li><code>\bYuppi\b</code> matches "Yuppi" but not "Yuppink", "kyuppi", etc.</li>
+                <li><code>\bnormal\b</code> matches "normal" but not "Paranormal", "normalization", etc.</li>
+            </ul>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <h2>2. Anchoring at the Start of a Line</h2>
-            <p>We'll use the <code>^</code> character to anchor patterns at the beginning of a line. We'll demonstrate how to match lines that start with specific letters.</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h2>3. Anchoring at the End of a Line</h2>
-            <p>We'll learn how to use the <code>$</code> character to anchor patterns at the end of a line. We'll provide examples of matching lines that end with specific symbols.</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h2>4. Word Boundaries</h2>
-            <p>We'll explore using the <code>\b</code> character to delimit patterns at word boundaries. We'll demonstrate how to find complete words within the text.</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h2>5. Practical Applications of Expression Boundaries</h2>
-            <p>We'll discover practical scenarios where Expression Boundaries enhance the accuracy of our regular expression matches. We'll provide examples of searches and filtering.</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h2>6. Summary and Conclusions</h2>
-            <p>We'll recap the key concepts learned in this topic. We'll highlight the advantages of using anchors in regular expressions and offer final tips.</p>
+            <h2>
+                Non-word boundary: \B
+            </h2>
+            <p>
+                Unlike <code>\b</code>, <code>\B</code> matches any position in the string where there is no boundary between word and non-word characters. 
+                It is used to search for patterns within words.
+                For example, the regular expression <code>\Bar\B</code> will match "learning" and "warning" because "ar" appears in the middle of a word.
+                But not "car" or "architect" because "ar" is not in the middle of the words.
+            </p>
+            <h2>Example: Matching within words</h2>
+            <ul>
+                <li><code>\bregex\b</code> matches within"TRregexX" but not "regexp", "myregex", etc.</li>
+                <li><code>\bapple\b</code> matches "pineapples" but not "pineapple", "applepen", etc.</li>
+                <li><code>\barc\b</code> matches "search" but not "architect", "marc", etc.</li>
+            </ul>
         </div>
     </div>
 </div>
