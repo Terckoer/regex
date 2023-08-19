@@ -16,9 +16,9 @@
                Examples will illustrate its usage.
             </p>
             <ul>
-                <li>Example: <code>/a*/</code> will match "", "a", "aa", "aaa", and so on.</li>
-                <li>Example: <code>/z*/</code> will match "", "z", "zz", "zzzzzzzzzzzzz", and so on.</li>
-                <li>Example: <code>/wo*/</code> will match "w", "wo", "woo", "wooooo", and so on.</li>
+                <li>Example: <code>a*</code> will match "", "a", "aa", "aaa", and so on.</li>
+                <li>Example: <code>z*</code> will match "", "z", "zz", "zzzzzzzzzzzzz", and so on.</li>
+                <li>Example: <code>wo*</code> will match "w", "wo", "woo", "wooooo", and so on.</li>
             </ul>
         </div>
     </div>
@@ -29,9 +29,9 @@
                Practical scenarios will demonstrate its application.
             </p>
             <ul>
-                <li>Example: <code>/a+/</code> will match "a", "aa", "aaa", but not "".</li>
-                <li>Example: <code>/z+/</code> will match "z", "zz", "zzzzzz", but not "".</li>
-                <li>Example: <code>/wo+/</code> will match "wo", "woo", "woooooo", but not "w".</li>
+                <li>Example: <code>a+</code> will match "a", "aa", "aaa", but not "".</li>
+                <li>Example: <code>z+</code> will match "z", "zz", "zzzzzz", but not "".</li>
+                <li>Example: <code>wo+</code> will match "wo", "woo", "woooooo", but not "w".</li>
             </ul>
         </div>
     </div>
@@ -42,8 +42,8 @@
                We'll provide examples to showcase its usefulness.
             </p>
             <ul>
-                <li>Example: <code>/colou?r/</code> will match "color" and "colour".</li>
-                <li>Example: <code>/Hello?/</code> will match "Hell" and "Hello".</li>
+                <li>Example: <code>colou?r</code> will match "color" and "colour".</li>
+                <li>Example: <code>Hello?</code> will match "Hell" and "Hello".</li>
             </ul>
         </div>
     </div>
@@ -54,8 +54,8 @@
                Curly braces specifies that the preceding element must appear exactly "n" times.
             </p>
             <ul>
-                <li>Example: <code>/a{3}/</code>, will match  "aaa", "baaa", "aabaabaaa" but not "aa", "a", "baa".</li>
-                <li>Example: <code>/\b\w{5}\b/</code>, will match "hello", "world", "apple" but not "hi", "code", "carrot".</li>
+                <li>Example: <code>a{3}</code>, will match  "aaa", "baaa", "aabaabaaa" but not "aa", "a", "baa".</li>
+                <li>Example: <code>\b\w{5}\b</code>, will match "hello", "world", "apple" but not "hi", "code", "carrot".</li>
             </ul>
         </div>
     </div>
@@ -66,8 +66,8 @@
                Practical examples will demonstrate the power of this technique.                
             </p>
             <ul>
-                <li>Example: <code>/\d{2}/\d{2}/\d{4}/</code>, will match  "25/12/2023", "01/01/2022" but not  "5/6/21", "2023/12/25".</li>
-                <li>Example: <code>/\d{2}-\w{3}-\d{4}/</code>, will match  "15-FEB-1997", "01-OCT-2020" but not  "15-01-2021", "23-JULY-2025".</li>
+                <li>Example: <code>\d{2}/\d{2}/\d{4}</code>, will match  "25/12/2023", "01/01/2022" but not  "5/6/21", "2023/12/25".</li>
+                <li>Example: <code>\d{2}-\w{3}-\d{4}</code>, will match  "15-FEB-1997", "01-OCT-2020" but not  "15-01-2021", "23-JULY-2025".</li>
             </ul>
         </div>
     </div>

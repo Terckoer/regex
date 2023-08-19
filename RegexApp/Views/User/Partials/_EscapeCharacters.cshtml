@@ -9,16 +9,16 @@
             <h2>Commonly Used Escape Characters</h2>
             <p>Here are some commonly used escape characters in regular expressions:</p>
             <ul>
-                <li><code>/\d/</code> matches any digit character.</li>
-                <li><code>/\w/</code> matches any word character (alphanumeric + underscore).</li>
-                <li><code>/\s/</code> matches any whitespace character (space, tab, newline, etc.).</li>
-                <li><code>/\./</code> matches a literal period (dot).</li>
+                <li><code>\d</code> matches any digit character.</li>
+                <li><code>\w</code> matches any word character (alphanumeric + underscore).</li>
+                <li><code>\s</code> matches any whitespace character (space, tab, newline, etc.).</li>
+                <li><code>\.</code> matches a literal period (dot).</li>
             </ul>
         </div>
         <div class="col-md-6">
             <h2>Usage</h2>
             <p>Escape characters are useful when you want to match characters that have special meanings in regular expressions. They help you match specific characters regardless of their special meanings.</p>
-            <p>For example, <code>/\d/</code> matches any digit character, and <code>/\//</code> matches a literal forward slash.</p>
+            <p>For example, <code>\d</code> matches any digit character, and <code>\/</code> matches a literal forward slash.</p>
         </div>
     </div>
     <div class="row">        
@@ -26,20 +26,20 @@
             <h2>Example: Matching a Literal Dot</h2>
             <p>This regular expression will match a literal dot:</p>
             <ul>
-                <li><code>/\./</code> matches ".".</li>
-                <li><code>/\./</code> does not match "a", "1", etc.</li>
+                <li><code>\.</code> matches ".".</li>
+                <li><code>\.</code> does not match "a", "1", etc.</li>
             </ul>
             <h2>Example: Matching a Backslash</h2>
             <p>This regular expression will match a literal backslash:</p>
             <ul>
-                <li><code>/\\</code> matches "\\".</li>
-                <li><code>/\\</code> does not match "a", "1", etc.</li>
+                <li><code>\\</code> matches "\".</li>
+                <li><code>\\</code> does not match "a", "1", etc.</li>
             </ul>
             <h2>Example: Matching Special Characters</h2>
             <p>This regular expression will match a specific set of characters:</p>
             <ul>
-                <li><code>/[\/\.\-]/</code> matches "/", ".", or "-".</li>
-                <li><code>/[\/\.\-]/</code> does not match "a", "1", etc.</li>
+                <li><code>[\/\.\-]</code> matches "/", ".", or "-".</li>
+                <li><code>[\/\.\-]</code> does not match "a", "1", etc.</li>
             </ul>
         </div>
     </div>    
